@@ -3,8 +3,9 @@
     require_once ABSPATH.'classes/Crud.php';
 
     session_start();
-    if(!isset($_SESSION['email'])){
-        header('Location:'.BASEURL.'login.php');
+
+    if(!isset($_SESSION['email']) or $_SESSION['nivel']<2){
+        header('Location:'.BASEURL.'index.php');
     }
     $titulo = "Usuarios - Athernos";
 ?>
@@ -58,13 +59,19 @@
                 if ($select->num_rows > 0){
                 
                     while($rows = $select->fetch_object()){
-                                       
+                    if ($rows->nivel == 0){
+                        $nivel = "Normal - 0";
+                    }elseif($rows->nivel == 1){
+                        $nivel = "Editor - 1";
+                    }elseif($rows->nivel == 2){
+                        $nivel = "Administrador - 2";
+                    }                                      
             ?>
                 <tr>
                     <th class="id" scope="row"><?php echo $rows->id?></th>                    
                     <td class="codigo"><?php echo $rows->email?></td>
                     <td class="nome"><?php echo $rows->nome?></td>
-                    <td class="categoria"><?php echo $rows->nivel?></td>
+                    <td class="categoria"><?php echo $nivel?></td>
                     <td class="edit">
                         <a href="<?php echo BASEURL;?>core/editar.php?idUsu=<?php echo $rows->id?>">
                         <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 

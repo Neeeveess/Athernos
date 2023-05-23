@@ -3,9 +3,11 @@
     require_once '../../config.php';
     require_once ABSPATH.'classes/Crud.php';
     $titulo = "Cadastro de Usuários - Athernos";
+
     if(!isset($_SESSION['email']) or $_SESSION['nivel']<2){
         header('Location:'.BASEURL.'index.php');
     }
+    
     if(isset($_POST['dados']) and !empty($_POST['dados'])){
         $dados = $_POST['dados'];
         $senha2 = $_POST['senha2'];

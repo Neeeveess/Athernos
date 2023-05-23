@@ -50,7 +50,7 @@
                 <td><?php echo $linhas['custo_unit'];?></td>
                 <td><?php echo $linhas['quantidade'];?></td>
                 <td><?php echo date('d/m/Y', $validade);?></td>
-                <td><?php echo date('d/m/Y', $entrada);?></td>
+                <td><?php echo date('d/m/Y - H:i', $entrada);?></td>
             </tr>
         
 
