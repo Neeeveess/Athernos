@@ -1,0 +1,69 @@
+<?php
+    require_once '../../config.php';
+    require_once ABSPATH . 'classes/Crud.php';
+    
+    session_start();
+    $titulo = "Entrada de Produtos - Athernos";
+    if(!isset($_SESSION['email']) or $_SESSION['nivel']<1){
+        header('Location:'.BASEURL.'index.php');
+    }
+
+    if(isset($_POST['dados'])and !empty($_POST['dados'])){
+        
+        //var_dump($_POST['dados']);
+        $dados = $_POST['dados'];
+
+        $obj_insert = new Crud();
+        $obj_insert->insert('lotes',$dados);
+
+        header('Location:'.BASEURL.'nav/produto/produtos.php');
+        
+    }
+
+?>
+
+<?php include_once ABSPATH.'layout/header.php';?>
+
+<body class="main-index">
+    <?php include_once ABSPATH.'layout/menu-lateral.php';?>
+    <section class="cabecalho">
+        <?php
+            if(isset($_GET['msg'])){
+        ?>
+            <div class="msg-alerta" roles="alert">Código não cadastrado</div>
+        <?php
+            }   
+        ?>
+    </section>
+    <main class="corpo_produto">
+        <section class="">
+            <form method='post'>
+                <label for="codigo" class="">Nome do Produto</label>
+                <select name="dados[id_produto]" id="" require>
+                    <?php
+                        require_once ABSPATH.'classes/Crud.php'; 
+                        $obj_select = new Crud;
+                        $select = $obj_select->select("id,nome","produtos");
+                        if($select->num_rows > 0){
+                            while($rows = $select->fetch_object()){
+                                echo "<option value ='{$rows->id}'>{$rows->nome}</option>";
+                            }
+
+                            
+                        }                                      
+                    ?>
+                </select>    
+                <label for="custo" class="">Custo Unitário</label>
+                <input type="number" name="dados[custo_unit]" id="totalAmt" step=0.01 required>
+                
+                <label for="quantidade" class="">Quantidade</label>
+                <input type="number" name="dados[quantidade]" required>
+                
+                <label for="Validade" class="">Validade</label>
+                <input type="date" name="dados[validade]" required>
+                
+                <input type= "submit">
+                <a href="<?php echo BASEURL;?>index.php">Voltar</a>
+            </form>
+        </section>
+</body>
