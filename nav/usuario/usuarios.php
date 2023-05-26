@@ -36,7 +36,7 @@
             </div>
         </section>
         <?php  ?>
-        <table>
+        <table style="width:100%;">
             <thead>
                 <tr>
                     <th class="id" scope="col">ID</th>

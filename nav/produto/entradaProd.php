@@ -35,35 +35,40 @@
             }   
         ?>
     </section>
-    <main class="corpo_produto">
-        <section class="">
-            <form method='post'>
-                <label for="codigo" class="">Nome do Produto</label>
-                <select name="dados[id_produto]" id="" require>
-                    <?php
-                        require_once ABSPATH.'classes/Crud.php'; 
-                        $obj_select = new Crud;
-                        $select = $obj_select->select("id,nome","produtos");
-                        if($select->num_rows > 0){
-                            while($rows = $select->fetch_object()){
-                                echo "<option value ='{$rows->id}'>{$rows->nome}</option>";
-                            }
+        <section class="entrada-prod">
+            <form method='post' class="box-cadastro">
+                <h1>Entrada de Produtos</h1>
+                <div class="textfield categoria">
+                    <label for="codigo" class="">Nome do Produto:</label>
+                    <select name="dados[id_produto]" id="" require>
+                        <?php
+                            require_once ABSPATH.'classes/Crud.php'; 
+                            $obj_select = new Crud;
+                            $select = $obj_select->select("id,nome","produtos");
+                            if($select->num_rows > 0){
+                                while($rows = $select->fetch_object()){
+                                    echo "<option value ='{$rows->id}'>{$rows->nome}</option>";
+                                }
 
-                            
-                        }                                      
-                    ?>
-                </select>    
-                <label for="custo" class="">Custo Unitário</label>
-                <input type="number" name="dados[custo_unit]" id="totalAmt" step=0.01 required>
-                
-                <label for="quantidade" class="">Quantidade</label>
-                <input type="number" name="dados[quantidade]" required>
-                
-                <label for="Validade" class="">Validade</label>
-                <input type="date" name="dados[validade]" required>
-                
+                                
+                            }                                      
+                        ?>
+                    </select>  
+                </div>  
+                <div class="textfield">
+                    <label for="custo" class="">Custo Unitário:</label>
+                    <input type="number" name="dados[custo_unit]" id="totalAmt" step=0.01 required>
+                </div>  
+                <div class="textfield">
+                    <label for="quantidade" class="">Quantidade:</label>
+                    <input type="number" name="dados[quantidade]" required>
+                </div>   
+                <div class="textfield">   
+                    <label for="Validade" class="">Validade:</label>
+                    <input type="date" name="dados[validade]" required>
+                </div>    
                 <input type= "submit">
-                <a href="<?php echo BASEURL;?>index.php">Voltar</a>
+                <a href="<?php echo BASEURL;?>index.php">Voltar:</a>
             </form>
         </section>
 </body>
