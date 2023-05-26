@@ -397,6 +397,7 @@ img {
                 border-left: 2px solid rgba(0, 0, 0, 0.1);
 
                 a {
+                    color: $preto;
                     user-select: auto;
                     padding: 0;
                     margin-left: 5px;
@@ -640,6 +641,10 @@ img {
             margin-bottom: 0.5em;
             span {
                 color: $preto;
+                font-weight: 800;
+                text-transform: uppercase;
+                font-size: 4rem;
+                font-style: italic;
             }
         }
         @media screen and (max-width: 770px) {
@@ -742,7 +747,7 @@ img {
             }
             th,
             td {
-                width: 10%;
+                width: 15%;
                 padding: 7px;
             }
             tbody {
@@ -881,6 +886,7 @@ img {
                 transition: 0.1s;
                 text-transform: uppercase;
                 &:hover {
+                    transition: 0.1s;
                     color: $branco;
                     background-color: #f64125;
                 }
@@ -890,7 +896,7 @@ img {
             }
         }
     }
-    .modal {
+    .modal-categoria {
         width: 25%;
         margin: auto;
         .modal-dialog {
@@ -917,6 +923,13 @@ img {
                             background: $laranja;
                             padding: 5px;
                             border-radius: 5px;
+                            cursor: pointer;
+                            transition: 0.1s;
+                            &:hover {
+                                transition: 0.1s;
+                                color: $branco;
+                                background-color: #f64125;
+                            }
                         }
                     }
                 }

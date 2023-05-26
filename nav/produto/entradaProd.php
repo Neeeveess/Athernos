@@ -68,7 +68,7 @@
                     <input type="date" name="dados[validade]" required>
                 </div>    
                 <input type= "submit">
-                <a href="<?php echo BASEURL;?>index.php">Voltar:</a>
+                <a href="<?php echo BASEURL;?>index.php">Voltar</a>
             </form>
         </section>
 </body>

@@ -31,8 +31,8 @@
         <thead>
             <tr id="xy">
                 <th scope="col">Lote</th>
-                <th scope="col">Custo (UN)</th>
                 <th scope="col">Quantidade</th>
+                <th scope="col">Custo (UN)</th>
                 <th scope="col">Validade</th>
                 <th scope="col">Entrada</th>
             </tr>
@@ -47,8 +47,8 @@
 ?>
             <tr>
                 <th scope="row"><?php echo $linhas['codigo'];?></th>
-                <td><?php echo $linhas['custo_unit'];?></td>
                 <td><?php echo $linhas['quantidade'];?></td>
+                <td><?php echo "R$ ".number_format($linhas['custo_unit'],2,",","");?></td>
                 <td><?php echo date('d/m/Y', $validade);?></td>
                 <td><?php echo date('d/m/Y - H:i', $entrada);?></td>
             </tr>

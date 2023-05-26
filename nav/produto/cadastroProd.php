@@ -98,7 +98,7 @@
             <a href="<?php echo BASEURL;?>index.php">Voltar</a>
         </form>
         <!-- MODAL -->
-        <div class="modal fade" id="NovaCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal modal-categoria fade" id="NovaCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -108,7 +108,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form action="" method="post" autocomplete="off">
                         <input type="text" name="categoria" id="categoria" onChange= "javascript:this.value=this.value.toUpperCase()" required> 
                         <input type="submit" value="Cadastrar">                       
                     </form>
