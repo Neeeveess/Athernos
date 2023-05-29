@@ -5,15 +5,12 @@
     $obj = new Crud();   
     $titulo = "Editar - Athernos";
 ?>
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <?php include_once ABSPATH.'layout/header.php';?>
 <?php include_once ABSPATH.'layout/menu-lateral.php';?>
 <body class="main-index">
-    
-    
-    <section class="cadastrar-prod">
     <?php 
-        if(isset($_GET['idProd'])){
+        if(isset($_GET['idProd'])){ 
             $select = $obj->select("*","produtos","id='$_GET[idProd]'");
             if($select->num_rows > 0){
                 while ($linhas = $select->fetch_object()){
@@ -38,54 +35,51 @@
                 header('Location:'.BASEURL.'nav/produto/produtos.php');  
             }
         ?>
-        <form class="box-cadastro" method='post' autocomplete="off">
-            <input type="hidden" name="dados[idProd]" value="<?php echo $_GET['idProd'];?>" required>
-            <div class="textfield">
-                <label for="codigo" class="">Codigo:</label>
-                <input type="text" name="dados[codigo]" value = "<?php echo $codigoProd;?>" required>
-            </div>
-            <div class="textfield">
-                <label for="nome" class="">Nome:</label>
-                <input type="text" name="dados[nome]" 
-                value = "<?php echo $nomeProd;?>"onChange= "javascript:this.value=this.value.toUpperCase()" required>
-            </div>
-            <div class="textfield categoria">
-                <label for="Categoria" class="">Categoria:</label>
-  
-                <select name="dados[id_categoria]" required>
-
-                    <option>...</option> 
-              
-                    <?php
-
-                    $selectcat = $obj->select("*","categoria");
-                    if ($selectcat->num_rows > 0){
-                        while($rows=$selectcat->fetch_object()){
-                            ?>
-                            <option value = "<?php echo $rows->id;?>"><?php echo $rows->nome;?></option>                            
-                            <?php
+        <section class="cadastrar-prod">
+            <form class="box-cadastro" method='post' autocomplete="off">
+                <h1>Editar Produto</h1>
+                <input type="hidden" name="dados[idProd]" value="<?php echo $_GET['idProd'];?>" required>
+                <div class="textfield">
+                    <label for="codigo" class="">Codigo:</label>
+                    <input type="text" name="dados[codigo]" value = "<?php echo $codigoProd;?>" required>
+                </div>
+                <div class="textfield">
+                    <label for="nome" class="">Nome:</label>
+                    <input type="text" name="dados[nome]" 
+                    value = "<?php echo $nomeProd;?>"onChange= "javascript:this.value=this.value.toUpperCase()" required>
+                </div>
+                <div class="textfield categoria">
+                    <label for="Categoria" class="">Categoria:</label>
+    
+                    <select name="dados[id_categoria]" id="" require class="select2">             
+                        <?php
+                        $selectcat = $obj->select("*","categoria");
+                        if ($selectcat->num_rows > 0){
+                            while($rows=$selectcat->fetch_object()){
+                                ?>
+                                <option value = "<?php echo $rows->id;?>" <?php if ($idCat == $rows->id){echo " selected";} ?>>
+                                    <?php echo $rows->nome;?>
+                                </option>                            
+                                <?php
+                            }
                         }
-                    }
-                    ?>
-                </select>
-            </div>
+                        ?>
+                    </select>
+                </div>
 
-            <input type= "submit">
-            <a href="<?php echo BASEURL;?>index.php">Voltar</a>
-        </form>
+                <input type= "submit">
+                <a href="<?php echo BASEURL;?>index.php">Voltar</a>
+            </form>
+        </section>
         <?php
-        }
-        
-        ?>
-    </section>
+        } ?>
+    
 
-</body>
 
    <!-- EDITAR USUARIOS  -->
-<body>
-
+   
    <?php 
-        if(isset($_GET['idUsu'])){
+        if(isset($_GET['idUsu'])){ 
             $select = $obj->select("*","usuarios","id='$_GET[idUsu]'");
             if($select->num_rows > 0){
                 while ($linhas = $select->fetch_object()){
@@ -112,7 +106,9 @@
         ?>
         <section class="cadastrar-prod">
         <form class="box-cadastro" method='post' autocomplete="off">
+        <h1>Editar Usuário</h1>
             <input type="hidden" name="dados[idUsu]" value="<?php echo $_GET['idUsu'];?>" required>
+            
             <div class="textfield">
                 <label for="codigo" class="">Email:</label>
                 <input type="text" name="dados[email]" value = "<?php echo $emailUsu;?>" required>
@@ -122,7 +118,7 @@
                 <input type="text" name="dados[nome]" 
                 value = "<?php echo $nomeUsu;?>"onChange= "javascript:this.value=this.value.toUpperCase()" required>
             </div>
-            <div class="textfield categoria">
+            <div class="textfield-radio">
             <label>
                     <input type="radio" name="dados[nivel]" value="2" required>
                     Administrador
@@ -142,8 +138,11 @@
         </form>
         </section>
         <?php
-        }
-        
-        ?>
-
-        
+        }?>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2();
+        });
+    </script>

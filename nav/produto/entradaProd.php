@@ -20,8 +20,10 @@
         
     }
 
-?>
 
+
+?>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <?php include_once ABSPATH.'layout/header.php';?>
 
 <body class="main-index">
@@ -40,11 +42,11 @@
                 <h1>Entrada de Produtos</h1>
                 <div class="textfield categoria">
                     <label for="codigo" class="">Nome do Produto:</label>
-                    <select name="dados[id_produto]" id="" require>
+                    <select name="dados[id_produto]" id="" require class="select2">
                         <?php
                             require_once ABSPATH.'classes/Crud.php'; 
                             $obj_select = new Crud;
-                            $select = $obj_select->select("id,nome","produtos");
+                            $select = $obj_select->select("id,nome","produtos", 1, "nome");
                             if($select->num_rows > 0){
                                 while($rows = $select->fetch_object()){
                                     echo "<option value ='{$rows->id}'>{$rows->nome}</option>";
@@ -71,4 +73,12 @@
                 <a href="<?php echo BASEURL;?>index.php">Voltar</a>
             </form>
         </section>
+
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2();
+        });
+    </script>
 </body>

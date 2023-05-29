@@ -3,7 +3,7 @@
     require_once ABSPATH."config/Conn.php";
     class Crud extends Conn {
 
-        public function select($col, $tabela, $cond = null,$order = null){
+        public function select($col, $tabela, $cond = null, $order = null){
             $this->connUser();
             if ($cond != null){
                 if ($order != null){

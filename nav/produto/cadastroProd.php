@@ -47,21 +47,20 @@
     
 ?>
 
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <?php include_once ABSPATH.'layout/header.php';?>
 
 <body class="main-index">
     <?php include_once ABSPATH.'layout/menu-lateral.php';?>
-    <section class="cadastrar-prod">
-        
+    <section class="cadastrar-prod">        
         <section class="msg">
-        <?php
-                if(isset($_GET['msg']) and $_GET['msg'] == '1'){
-        ?>
-                <div class="msg-alerta" roles="alert">Código ja cadastrado!</div>
-        <?php
-                }
-        ?>
+            <?php
+                    if(isset($_GET['msg']) and $_GET['msg'] == '1'){
+            ?>
+                    <div class="msg-alerta" roles="alert">Código ja cadastrado!</div>
+            <?php
+                    }
+            ?>
         </section>
         <form class="box-cadastro" method='post' autocomplete="off">
             <h1>Cadastro de Produtos</h1>
@@ -75,7 +74,8 @@
             </div>
             <div class="textfield categoria">
                 <label for="Categoria" class="">Categoria:</label>
-                <select name="dados[id_categoria]" required>
+                
+                <select name="dados[id_categoria]" id="" require class="select2">
                     <option>...</option>
                     <?php
 
@@ -101,22 +101,26 @@
         <div class="modal modal-categoria fade" id="NovaCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Nova categoria:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post" autocomplete="off">
-                        <input type="text" name="categoria" id="categoria" onChange= "javascript:this.value=this.value.toUpperCase()" required> 
-                        <input type="submit" value="Cadastrar">                       
-                    </form>
-                    
-                </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Nova categoria:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post" autocomplete="off">
+                            <input type="text" name="categoria" id="categoria" onChange= "javascript:this.value=this.value.toUpperCase()" required> 
+                            <input type="submit" value="Cadastrar">                       
+                        </form>                        
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2();
+        });
+    </script>
 </body>

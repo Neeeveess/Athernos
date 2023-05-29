@@ -39,7 +39,7 @@
 
 <body class="main-login">
         <form method="post" class="form" autocomplete="off">
-            <h1>Cadastro</h1>
+            <h1>Cadastrar Usuário</h1>
             <?php
                 if(isset($_GET['msg']) and $_GET['msg'] == '1'){
             ?>
@@ -70,8 +70,7 @@
                 <input class="input2" type="password" name="senha2" required>
                 <span class="focus-input2" data-placeholder="Confirme sua senha"></span>
             </div>
-            <div class="textfield-radio">
-                
+            <div class="textfield-radio">                
                 <label>
                     <input type="radio" name="dados[nivel]" value="2" required>
                     Administrador

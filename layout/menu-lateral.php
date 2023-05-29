@@ -15,6 +15,7 @@
                 <a href="<?php echo BASEURL;?>nav/produto/importar-produtos.php">Importar Planilha</a>
                 <a href="<?php echo BASEURL;?>nav/produto/cadastroProd.php">Cadastrar Produtos</a>
                 <a href="<?php echo BASEURL;?>nav/produto/entradaProd.php">Entrada de Produtos</a>
+                <a href="<?php echo BASEURL;?>nav/produto/saidaProd.php">Saída de Produtos</a>
                 <?php } ?>
             </details>
             <?php 

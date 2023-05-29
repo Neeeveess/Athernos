@@ -13,7 +13,7 @@ $laranja: #f55139;
 }
 a {
     text-decoration: none;
-    color: #000;
+    color: $preto;
 }
 input {
     border: none;
@@ -155,8 +155,8 @@ img {
         h1 {
             color: $preto;
             font-size: 36px;
-            font-weight: 900;
-            letter-spacing: 3px;
+            font-weight: 700;
+            letter-spacing: 2px;
             margin-bottom: 0.5em;
             text-transform: uppercase;
         }
@@ -252,6 +252,9 @@ img {
                 background-color: #f64125;
             }
         }
+        a {
+            color: $preto;
+        }
     }
 }
 
@@ -316,13 +319,15 @@ img {
                     width: 100%;
                     padding: 0 0 10px 5px;
                     display: flex;
+                    
                     summary {
                         position: relative;
                         width: 60%;
                         cursor: pointer;
                         list-style: none;
                         font-size: 1em;
-                        font-weight: 600;
+                        font-weight: 400;                        
+                        color: $preto;
 
                         &::before,
                         &::after {
@@ -787,9 +792,9 @@ img {
     }
     .cadastrar-prod,
     .entrada-prod {
-        padding: 120px 0;
+
         width: 80%;
-        margin: 0 auto;
+        margin: auto;
         .msg {
             width: fit-content;
             margin: 0 auto 50px auto;
@@ -810,7 +815,7 @@ img {
             box-shadow: 0px 0px 40px 9px #c9c9c9;
             background: #fff;
             padding: 50px;
-            height: 80%;
+            height: fit-content;
             border-radius: 10px;
             h1 {
                 color: $preto;
