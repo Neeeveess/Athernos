@@ -1,5 +1,6 @@
 <?php
-    include_once "config/connect.php";
+    require_once '../config.php';
+    require_once ABSPATH.'classes/Crud.php';
 
     $arquivo = $_FILES['file']['tmp_name'];
     $nome = $_FILES['file']['name'];
@@ -14,59 +15,61 @@
         //echo "Valida";
 
             $objeto = fopen($arquivo,'r');
-
             $dia_atual = date('Y-m-d');
             $hj = new DateTime($dia_atual);
         
                 
-
-
-            while(($dados = fgetcsv($objeto,1000,",")) !== FALSE){
+            $i = 0;
+            
+            $quantidade = [[]];
+            $custo = [[]];
+            $validade = [];            
+            while(($dados = fgetcsv($objeto,1000,",")) !== FALSE){     
+                $cont = 5;   
+                $j = 1;                  
+                $codigo = utf8_encode($dados[0]);
                 $nome = utf8_encode($dados[1]);
-                $valor = utf8_encode($dados[2]);
-                $qtde = utf8_encode($dados[3]);
-                $validade = utf8_encode($dados[4]);
-                $dt2 = new DateTime($validade);
-                $intervalo = $dt2->diff ($hj);
-                $dias = $intervalo->format('%R%a');
-
-                if($validade == '2022-11-31'){
-                    $validade = '2022-12-01';
+                $categoria = utf8_encode($dados[2]);
+                $quantidade[$i][0] = utf8_encode($dados[3]);
+                $custo[$i][0] = utf8_encode($dados[4]);  
+                $loop = false;       
+                if($loop == true){
+                   
+                    loop:
+                        $quantidade[$i][$j] = utf8_encode($dados[$cont]);
+                        $cont++;
+                        $custo[$i][$j] = utf8_encode($dados[$cont]);     
+                        $cont++;        
+                        $j++;                     
                 }
-                $user = 1;
+                if(!preg_match("/[-]/i",$dados[$cont])){
+                    goto loop;
+                }
+                $validade[$i] = utf8_encode($dados[$cont]);  
 
-                
-                if ($dias > 60){
-                    //VENCIDOS
-                    $produtos = "INSERT INTO solicitacaotroca(NomeProd,valorProd,qtdeProd,validadeProd,Usuario_idUser)
-                    VALUES('$nome','$valor','$qtde','$validade','$user')";
+                echo $codigo." / ";
+                echo $nome." / ";
+                echo $categoria." / ";
+                echo $quantidade[$i][0]." / ";
+                echo $custo[$i][0]." / ";
+                if(count($quantidade[$i]) > 1){
+                    for ($j=1; $j < count($quantidade[$i]); $j++) { 
+                        echo $quantidade[$i][$j]." / ";
+                        echo $custo[$i][$j]." / ";
+                    }
 
-                    $result = mysqli_query($conn,$produtos);
-        
-                }elseif($dias <61 and $dias > 0){
-                    //PERTO DA VALIDADE
-                    $produtos = "INSERT INTO solicitacaotroca(NomeProd,valorProd,qtdeProd,validadeProd,Usuario_idUser)
-                    VALUES('$nome','$valor','$qtde','$validade','$user')";
+                }
+                echo $validade[$i];
+                echo "<br>";
+                 
+                $i++;
 
-                    $result = mysqli_query($conn,$produtos);
-                }else{
-                    //DATA BOA
-                    $produtos = "INSERT INTO produto(NomeProd,valorProd,qtdeProd,validadeProd,Usuario_idUser)
-                    VALUES('$nome','$valor','$qtde','$validade','$user')";
-
-                    $result = mysqli_query($conn,$produtos);
-
-
-                
-               
-            }
-
-            if($result){
-                echo "dados inseridos";
-            }else{
-                echo "Erro";
-            }
+            // if($result){
+            //     echo "dados inseridos";
+            // }else{
+            //     echo "Erro";
+            // }
         }
     }
-    header('Location: index.php');
+    // header('Location:'.BASEURL.'index.php');
 ?>

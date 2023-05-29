@@ -13,8 +13,6 @@
 <?php include_once ABSPATH.'layout/header.php';?>
 <body class="main-index">
     <?php include_once ABSPATH.'layout/menu-lateral.php';
-     
-    
     ?>
     <main class="corpo-produto">
         <section class="cabecalho">
@@ -60,11 +58,11 @@
                 
                     while($rows = $select->fetch_object()){
                     if ($rows->nivel == 0){
-                        $nivel = "Normal - 0";
+                        $nivel = "Normal";
                     }elseif($rows->nivel == 1){
-                        $nivel = "Editor - 1";
+                        $nivel = "Editor";
                     }elseif($rows->nivel == 2){
-                        $nivel = "Administrador - 2";
+                        $nivel = "Administrador";
                     }                                      
             ?>
                 <tr>

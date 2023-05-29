@@ -12,7 +12,7 @@
                 <summary>Produtos</summary>
                 <a href="<?php echo BASEURL;?>nav/produto/produtos.php">Listar Produtos</a></li>
                 <?php if($_SESSION['nivel'] >= 1){ ?>
-                <a href="<?php echo BASEURL;?>nav/produto/importar-produtos.php">Importar Planilha</a>
+                <a href="<?php echo BASEURL;?>nav/produto/importarCsv.php">Importar Planilha</a>
                 <a href="<?php echo BASEURL;?>nav/produto/cadastroProd.php">Cadastrar Produtos</a>
                 <a href="<?php echo BASEURL;?>nav/produto/entradaProd.php">Entrada de Produtos</a>
                 <a href="<?php echo BASEURL;?>nav/produto/saidaProd.php">Saída de Produtos</a>
