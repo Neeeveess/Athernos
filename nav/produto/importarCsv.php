@@ -8,6 +8,13 @@
         header('Location:'.BASEURL.'index.php');
     }
     $titulo = "Importar Planilha - Athernos";
+    if(isset($_SESSION['cad']) and $_SESSION['cad'] == true){
+        ?>
+        <script>alert('Produtos Importados com sucesso!')</script>
+        <?php
+        
+        unset( $_SESSION['cad'] );        
+    }
 ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <?php include_once ABSPATH.'layout/header.php';?>

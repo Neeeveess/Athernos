@@ -60,9 +60,9 @@
                         }
                     }
                     $obj->insert("produtos",$dado);                    
-                }
-                $custo[$i][0] = utf8_encode($dados[4]);  
-                $quantidade[$i][0] = utf8_encode($dados[3]);
+                }                
+                $custo[$i][0] = utf8_encode($dados[3]);  
+                $quantidade[$i][0] = utf8_encode($dados[4]);
                 $validade[$i][0] = utf8_encode($dados[5]);  
                 $dadoLote['custo_unit'] = $custo[$i][0];
                 $dadoLote['quantidade'] = $quantidade[$i][0];
@@ -88,38 +88,24 @@
                             $dadoLote['id_produto'] = $rows->id;
                         }
                     }
-                    $obj->insert("lotes",$dadoLote); 
+                    if(!(($custo[$i][0] == 0) and ($quantidade[$i][0] == 0))){
+                        $obj->insert("lotes",$dadoLote); 
+                    }
                 if(isset($dados[$cont])){
                     goto loop;
                 }
-                
-
-                
-                // echo $dado['codigo']." / ";
-                // echo $dado['nome']." / ";
-                // echo $dado['id_categoria']." / ";
-                // echo $custo[$i][0]." / ";
-                // echo $quantidade[$i][0]." / ";
-                // echo $validade[$i][0];
-                // if(count($quantidade[$i]) > 1){
-                //     for ($j=1; $j < count($quantidade[$i]); $j++) { 
-                //         echo $custo[$i][$j]." / ";
-                //         echo " / ".$quantidade[$i][$j]." / ";
-                //         echo $validade[$i][$j];
-                //     }
-
-                // }                
-                // echo "<br>";
-                $i++;
-                
-
-                
+                $i++;          
         }
+        //SE JA EXISTE CADASTRO SO INSERE LOTES E FALA QUAL OS PRODUTOS SAO
         if(!is_null($array)){            
             foreach ($array as $valor){
                 echo $valor." Já existe! Lotes Inseridos <br>";
             }
         }
     }
-    // header('Location:'.BASEURL.'index.php');
+    session_start();
+    $_SESSION['cad'] = true;
+    //FAZER VERIFICACAO SE DEU CERTO
+    //FAZER TRANSAÇAO COM PHP PARA VOLTAR CASO DE ERRO
+    header('Location:'.BASEURL.'nav/produto/importarCsv.php');
 ?>

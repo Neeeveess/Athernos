@@ -19,6 +19,35 @@ input {
     border: none;
     outline: none;
 }
+//Scroll Personalizado
+/* 1 */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* 2 */
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* 3 */
+::-webkit-scrollbar-track {
+    background: #ededed;
+}
+
+/* 4 */
+::-webkit-scrollbar-track-piece {
+    border: 2px solid #ededed;
+    border-radius: 10px;
+}
+
+/* 5 */
+::-webkit-scrollbar-thumb {
+    background: #dddddd;
+    border-radius: 10px;
+    border: 1px solid #dddddd;
+}
+//----------------------------------
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -264,6 +293,7 @@ img {
     flex-flow: row nowrap;
     height: 100vh;
     width: 100vw;
+
     .menu-lateral {
         z-index: 10;
         position: relative;
@@ -659,6 +689,7 @@ img {
     .corpo-produto {
         width: 80%;
         margin: 20px auto 20px auto;
+        overflow: auto;
         svg {
             width: 20px;
             height: 20px;
@@ -746,6 +777,9 @@ img {
             thead {
                 background-color: #dddddd;
                 color: $laranja;
+                position: sticky;
+                top: 0;
+                left: 0;
             }
             th {
                 font-size: 1.2em;

@@ -46,7 +46,7 @@ SELECT
 FROM produtos
 LEFT JOIN lotes on lotes.id_produto = produtos.id
 JOIN categoria on categoria.id = produtos.id_categoria
-GROUP BY produtos.nome;
+GROUP BY produtos.codigo;
 
 
 DROP FUNCTION IF EXISTS inicial_maiuscula;

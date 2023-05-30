@@ -68,7 +68,7 @@
                 </div>
 
                 <input type= "submit">
-                <a href="<?php echo BASEURL;?>index.php">Voltar</a>
+                <a href="<?php echo BASEURL;?>nav/produto/produtos.php">Voltar</a>
             </form>
         </section>
         <?php
