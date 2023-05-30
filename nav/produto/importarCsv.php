@@ -23,6 +23,13 @@
 <?php include_once ABSPATH.'layout/menu-lateral.php';?>
     <section class="box-importar">
         <h1>Importar Planilha</h1>
+            <?php
+                    if(isset($_GET['msg']) and $_GET['msg'] == '1'){
+            ?>
+                    <div class="msg-alerta" roles="alert" style="color:#ff3d3d;">Extensão Inválida!</div>
+            <?php
+                    }
+            ?>
             <form action="<?php echo BASEURL;?>core/importar.php" method="post" enctype="multipart/form-data">                
                 <div class="textfield">
                     <label><input type="file" name="file"> </label>

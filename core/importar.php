@@ -1,21 +1,14 @@
-<?php
+<?php   
     require_once '../config.php';
     require_once ABSPATH.'classes/Crud.php';
-
     $obj = new Crud();
-    
-
     $arquivo = $_FILES['file']['tmp_name'];
     $nome = $_FILES['file']['name'];
-
     $ext = explode(".", $nome);
-
     $extensao = end($ext);
-
     if($extensao != "csv"){
-
+        header('Location:'.BASEURL.'nav/produto/importarCsv.php?msg=1');
     }else{
-        //echo "Valida";
 
         $objeto = fopen($arquivo,'r');
         $dia_atual = date('Y-m-d');
@@ -61,51 +54,55 @@
                     }
                     $obj->insert("produtos",$dado);                    
                 }                
-                $custo[$i][0] = utf8_encode($dados[3]);  
-                $quantidade[$i][0] = utf8_encode($dados[4]);
-                $validade[$i][0] = utf8_encode($dados[5]);  
-                $dadoLote['custo_unit'] = $custo[$i][0];
-                $dadoLote['quantidade'] = $quantidade[$i][0];
-                $dadoLote['validade'] = $validade[$i][0];
-                $loop = false;       
-                if($loop == true){                   
-                    loop:
-                        $custo[$i][$j] = utf8_encode($dados[$cont]); 
-                        $dadoLote['custo_unit'] = $custo[$i][$j];    
-                        $cont++;
-                        $quantidade[$i][$j] = utf8_encode($dados[$cont]);
-                        $dadoLote['quantidade'] = $quantidade[$i][$j];
-                        $cont++;        
-                        $validade[$i][$j] = utf8_encode($dados[$cont]);
-                        $dadoLote['validade'] = $validade[$i][$j];
-                        $cont++;     
-                        $j++;                     
-                }
-                    $cond = "nome ='$dado[nome]'"; 
-                    $select = $obj->select("id","produtos", $cond);
-                    if($select->num_rows > 0){
-                        while($rows = $select->fetch_object()){
-                            $dadoLote['id_produto'] = $rows->id;
+                if(isset($dados[3])){
+
+                    $quantidade[$i][0] = utf8_encode($dados[3]);
+                    $custo[$i][0] = utf8_encode($dados[4]);  
+                    $validade[$i][0] = utf8_encode($dados[5]);  
+                    $dadoLote['quantidade'] = $quantidade[$i][0];
+                    $dadoLote['custo_unit'] = $custo[$i][0];
+                    $dadoLote['validade'] = $validade[$i][0];
+                    $loop = false;       
+                    if($loop == true){                   
+                        loop:
+                            $quantidade[$i][$j] = utf8_encode($dados[$cont]);
+                            $dadoLote['quantidade'] = $quantidade[$i][$j];
+                            $cont++;
+                            $custo[$i][$j] = utf8_encode($dados[$cont]); 
+                            $dadoLote['custo_unit'] = $custo[$i][$j];                            
+                            $cont++;        
+                            $validade[$i][$j] = utf8_encode($dados[$cont]);
+                            $dadoLote['validade'] = $validade[$i][$j];
+                            $cont++;     
+                            $j++;                     
+                    }
+                        $cond = "nome ='$dado[nome]'"; 
+                        $select = $obj->select("id","produtos", $cond);
+                        if($select->num_rows > 0){
+                            while($rows = $select->fetch_object()){
+                                $dadoLote['id_produto'] = $rows->id;
+                            }
                         }
+                        if(!(($custo[$i][0] == 0) and ($quantidade[$i][0] == 0))){
+                            $obj->insert("lotes",$dadoLote); 
+                        }
+                    if(isset($dados[$cont])){
+                        goto loop;
                     }
-                    if(!(($custo[$i][0] == 0) and ($quantidade[$i][0] == 0))){
-                        $obj->insert("lotes",$dadoLote); 
-                    }
-                if(isset($dados[$cont])){
-                    goto loop;
                 }
                 $i++;          
         }
         //SE JA EXISTE CADASTRO SO INSERE LOTES E FALA QUAL OS PRODUTOS SAO
-        if(!is_null($array)){            
-            foreach ($array as $valor){
-                echo $valor." Já existe! Lotes Inseridos <br>";
-            }
-        }
-    }
-    session_start();
-    $_SESSION['cad'] = true;
-    //FAZER VERIFICACAO SE DEU CERTO
-    //FAZER TRANSAÇAO COM PHP PARA VOLTAR CASO DE ERRO
-    header('Location:'.BASEURL.'nav/produto/importarCsv.php');
+        // if(!is_null($array)){            
+        //     foreach ($array as $valor){
+        //         echo $valor." Já existe! Lotes Inseridos <br>";
+        //     }
+        // }
+        session_start();
+        $_SESSION['cad'] = true;
+        //FAZER VERIFICACAO SE DEU CERTO
+        //FAZER TRANSAÇAO COM PHP PARA VOLTAR CASO DE ERRO
+        header('Location:'.BASEURL.'nav/produto/importarCsv.php');
+    }    
+    
 ?>
