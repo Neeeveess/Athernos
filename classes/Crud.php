@@ -18,7 +18,7 @@
                 // echo  "SELECT $col FROM $tabela";
             }         
             return $this->conn->query($sql);
-            echo $this->conn->query($sql);
+            // echo $this->conn->query($sql);
         }
 
         public function insert($tabela, $dados){
@@ -27,7 +27,6 @@
             $val = "";
 
             if(is_array($dados)){
-
                 foreach($dados as $chave => $valor ){
                     $col .= $chave . ",";
                     $val .= "'".$valor . "',";
@@ -39,8 +38,7 @@
                 $sql = "INSERT into $tabela ($col) values ($val)";
                 $this->conn->query($sql);
             }else{
-                $sql = "INSERT into $tabela values (null, '$dados')";                
-                       
+                $sql = "INSERT into $tabela values (null, '$dados')";                                       
                 $this->conn->query($sql);                
             }
         }
