@@ -51,8 +51,6 @@
                                 while($rows = $select->fetch_object()){
                                     echo "<option value ='{$rows->id}'>{$rows->nome}</option>";
                                 }
-
-                                
                             }                                      
                         ?>
                     </select>  
