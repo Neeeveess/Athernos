@@ -24,7 +24,7 @@
                 $cont = 6;   
                 $j = 1;                  
                 $dado['codigo'] = utf8_encode($dados[0]);
-                $dado['nome'] = strtoupper(utf8_encode($dados[1]));
+                $dado['nome'] = strtoupper(($dados[1]));
                 $dado['id_categoria'] = strtoupper(utf8_encode($dados[2]));
                
                 $cond = "codigo ='$dado[codigo]'";                             

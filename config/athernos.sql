@@ -48,15 +48,36 @@ LEFT JOIN lotes on lotes.id_produto = produtos.id
 JOIN categoria on categoria.id = produtos.id_categoria
 GROUP BY produtos.codigo;
 
+create table log_lotes(
+    id int primary key auto_increment,
+    tipo varchar(45),
+    id_lotes int,
+    quantidade int,
+    data_manipulacao datetime
+);
 
-DROP FUNCTION IF EXISTS inicial_maiuscula;
-DELIMITER //
-CREATE FUNCTION inicial_maiuscula(texto VARCHAR(100))
-RETURNS VARCHAR(100)
-BEGIN
-    RETURN CONCAT(UPPER(LEFT(texto, 1)),LOWER(SUBSTRING(texto, 2)));
-END //
-DELIMITER ;
+Delimiter $
+
+create trigger entrada_lotes
+after insert on lotes
+for each row 
+begin 
+    insert into log_lotes(id_lotes,tipo,quantidade,data_manipulacao) 
+    values(new.codigo,"Entrada",new.quantidade,now());
+end $
+
+
+create trigger saida_lotes
+after update on lotes
+for each row 
+begin 
+    insert into log_lotes(id_lotes,tipo,quantidade,data_manipulacao) 
+    values(new.codigo,"Saida",new.quantidade,now());
+
+end $
+
+Delimiter ;
+
 
 
 insert into usuarios values(null,"Adm","adm@gmail.com","0e023702b107d3520a33e6a03362fed5","2");
