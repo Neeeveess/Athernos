@@ -24,8 +24,8 @@
                 $cont = 6;   
                 $j = 1;                  
                 $dado['codigo'] = utf8_encode($dados[0]);
-                $dado['nome'] = strtoupper(($dados[1]));
-                $dado['id_categoria'] = strtoupper(utf8_encode($dados[2]));
+                $dado['nome'] = mb_strtoupper(($dados[1]));
+                $dado['id_categoria'] = mb_strtoupper(utf8_encode($dados[2]));
                
                 $cond = "codigo ='$dado[codigo]'";                             
                 $select3 = $obj->select("codigo","produtos", $cond);
