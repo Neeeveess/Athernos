@@ -24,7 +24,8 @@
             }
             if($qtd <= $qtdLote){
                 $param = $qtdLote - $qtd; 
-                $obj->update("lotes","quantidade = '$param'",$cond); 
+                // $obj->update("lotes","quantidade = '$param'",$cond); 
+                $obj->call("registrar_saida('$dadosLote[id_lote]','$qtd')");
             }else{
                 echo "valor acima";
             }

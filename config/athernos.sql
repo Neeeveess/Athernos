@@ -66,15 +66,30 @@ begin
     values(new.codigo,"Entrada",new.quantidade,now());
 end $
 
+CREATE PROCEDURE registrar_saida(
+    IN codigo_id INT,
+    IN quantidade_saida INT
+)
+BEGIN
+    DECLARE quantidade_atual INT;
 
-create trigger saida_lotes
-after update on lotes
-for each row 
-begin 
-    insert into log_lotes(id_lotes,tipo,quantidade,data_manipulacao) 
-    values(new.codigo,"Saida",new.quantidade,now());
+    -- Obtém a quantidade atual do produto
+    SELECT quantidade INTO quantidade_atual FROM lotes WHERE codigo = codigo_id;
 
-end $
+    -- Verifica se a quantidade de saída é menor ou igual à quantidade atual
+    IF quantidade_saida <= quantidade_atual THEN
+        -- Atualiza a quantidade na tabela produtos
+        UPDATE lotes SET quantidade = quantidade_atual - quantidade_saida WHERE codigo = codigo_id;
+
+        -- Insere o registro de saída no histórico
+        INSERT INTO log_lotes (id_lotes,tipo,quantidade,data_manipulacao)
+        VALUES (codigo_id,"Saida", quantidade_saida,now());
+    ELSE
+        -- Caso a quantidade de saída seja maior que a quantidade atual, emite uma mensagem de erro
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Quantidade de saída superior à quantidade disponível.';
+    END IF;
+END$
 
 Delimiter ;
 

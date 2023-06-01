@@ -16,6 +16,10 @@
                 <a href="<?php echo BASEURL;?>nav/produto/cadastroProd.php">Cadastrar Produtos</a>
                 <a href="<?php echo BASEURL;?>nav/produto/entradaProd.php">Entrada de Produtos</a>
                 <a href="<?php echo BASEURL;?>nav/produto/saidaProd.php">Saída de Produtos</a>
+                
+                <?php } ?>
+                <?php if($_SESSION['nivel'] >= 2){ ?>
+                <a href="<?php echo BASEURL;?>nav/produto/relatorio.php">Relatório de Entrada/Saída</a>
                 <?php } ?>
             </details>
             <?php 

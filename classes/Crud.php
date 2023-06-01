@@ -54,5 +54,11 @@
             $sql = "DELETE FROM $tabela WHERE $coluna = $valor";
             $this->conn->query($sql);
         }
+
+        public function call($funcao){
+            $this->connUser();
+            $sql = "Call $funcao";
+            $this->conn->query($sql);
+        }
     }
 ?>
