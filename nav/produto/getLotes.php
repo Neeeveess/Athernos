@@ -45,6 +45,7 @@
         $validade = strtotime($linhas['validade']); 
         $entrada = strtotime($linhas['data_entrada']); 
 ?>
+    <?php if(!($linhas['quantidade'] <= 0)){ ?>
             <tr>
                 <th scope="row"><?php echo $linhas['codigo'];?></th>
                 <td><?php echo $linhas['quantidade'];?></td>
@@ -53,7 +54,7 @@
                 <td><?php echo date('d/m/Y - H:i', $entrada);?></td>
             </tr>
         
-
+        <?php }?>
 <?php } ?>
     </tbody>
 </table>

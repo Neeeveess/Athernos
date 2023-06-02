@@ -57,11 +57,11 @@
                 </div>  
                 <div class="textfield">
                     <label for="custo" class="">Custo Unitário:</label>
-                    <input type="number" name="dados[custo_unit]" id="totalAmt" step=0.01 required>
+                    <input type="number" min="1" name="dados[custo_unit]" id="totalAmt" step=0.01 required>
                 </div>  
                 <div class="textfield">
                     <label for="quantidade" class="">Quantidade:</label>
-                    <input type="number" name="dados[quantidade]" required>
+                    <input type="number" min="1" name="dados[quantidade]" required>
                 </div>   
                 <div class="textfield">   
                     <label for="Validade" class="">Validade:</label>

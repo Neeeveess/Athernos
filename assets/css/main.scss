@@ -38,13 +38,13 @@ input {
 /* 4 */
 ::-webkit-scrollbar-track-piece {
     border: 2px solid #ededed;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 /* 5 */
 ::-webkit-scrollbar-thumb {
     background: #dddddd;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid #dddddd;
 }
 //----------------------------------
@@ -55,6 +55,41 @@ input:-webkit-autofill:active {
     -webkit-text-fill-color: $laranja !important;
     transition: background-color 5000s ease-in-out 0s;
     -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+input[type="radio"] {
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 1px solid;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    &:checked {
+        background-color: $laranja;
+        color: $laranja;
+    }
+}
+.select2 {
+    width: 50% !important;
+}
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #fff;
+    border-bottom-color: $laranja;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    display: none;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 img {
     user-select: none;
@@ -294,6 +329,151 @@ img {
     height: 100vh;
     width: 100vw;
 
+    .form {
+        margin: auto;
+        width: 500px;
+        height: fit-content;
+        padding: 3em 10px;
+        border-radius: 10px;
+        background-color: $branco;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+        @media screen {
+            @media (max-width: 600px) {
+                width: 100vw;
+            }
+            @media (max-height: 1026px) {
+                max-height: 80vh;
+            }
+            @media (max-height: 600px) {
+                max-height: 100vh;
+            }
+        }
+
+        a {
+            width: fit-content;
+        }
+        .btn-cadastrar {
+            display: block;
+            margin-top: 8px;
+            color: $branco;
+        }
+        .msg-alerta {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ff3d3d;
+            padding: 5px 3px;
+            border-radius: 10px;
+            width: 100%;
+        }
+        h1 {
+            color: $preto;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .textfield {
+            padding: 5px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 75%;
+            position: relative;
+            margin-bottom: 1em;
+            // label{
+            //     font-size: 20px;
+            //     font-weight: 600;
+            //     padding: 5px;
+            //     color: $preto;
+            // }
+            .has-val.input2 + .focus-input2::after {
+                top: -20%;
+            }
+
+            .input2:focus + .focus-input2::after {
+                top: -20%;
+            }
+            .input2 {
+                width: 100%;
+                padding: 5px 10px;
+                border: none;
+                border-bottom: 2px solid #5858582a;
+                outline: none;
+                font-size: 16px;
+                background-color: $branco;
+                color: $laranja;
+            }
+            .focus-input2 {
+                position: absolute;
+                display: block;
+                height: 100%;
+                width: 100%;
+                top: -10%;
+                left: 1%;
+                pointer-events: none;
+
+                &::after {
+                    line-height: 1.2;
+                    content: attr(data-placeholder);
+                    display: block;
+                    width: 100%;
+                    position: absolute;
+                    top: 40%;
+                    left: 0%;
+                    padding-left: 5px;
+                    -webkit-transition: all 0.2s;
+                    -o-transition: all 0.2s;
+                    -moz-transition: all 0.2s;
+                    transition: all 0.2s;
+                    box-sizing: inherit;
+                }
+            }
+        }
+        .textfield-radio {
+            display: flex;
+            gap: 10px;
+            align-items: start;
+            h2 {
+                color: $preto;
+                align-self: center;
+                font-size: 20px;
+                margin-top: 0.5em;
+            }
+            label {
+                input {
+                    margin-right: 5px;
+                }
+            }
+        }
+        input[type="submit"] {
+            background-color: $laranja;
+            border: none;
+            width: 50%;
+            height: 50px;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 0.8em 0;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: $preto;
+            transition: 0.1s;
+            &:hover {
+                color: $branco;
+                background-color: #f64125;
+            }
+        }
+        a {
+            color: $preto;
+        }
+    }
     .menu-lateral {
         z-index: 10;
         position: relative;
@@ -305,7 +485,7 @@ img {
         background: #dddddd;
         box-shadow: 1px 0px 15px #97979791;
 
-        @media screen and (max-width: 1200px) {
+        @media screen and (max-width: 1000px) {
             width: 30%;
         }
         .logo {
@@ -329,6 +509,7 @@ img {
             margin-bottom: 30px;
             @media screen and (max-width: 1280px) {
                 padding: 30px 0;
+                font-size: 1.5em;
             }
 
             span {
@@ -337,6 +518,7 @@ img {
             }
         }
         .nav-bar {
+            overflow: auto;
             width: 100%;
             display: flex;
             align-items: start;
@@ -368,6 +550,9 @@ img {
                             height: 10px;
                             width: 2px;
                             background-color: $laranja;
+                            @media screen and (max-width: 1100px) {
+                                right: 0;
+                            }
                         }
                         &::before {
                             transform-origin: 0% 122%;
@@ -690,6 +875,10 @@ img {
         width: 80%;
         margin: 20px auto 20px auto;
         overflow: auto;
+        @media screen and (max-width: 1100px) {
+            margin: 10px;
+            width: 100%;
+        }
         svg {
             width: 20px;
             height: 20px;
@@ -780,6 +969,9 @@ img {
                 position: sticky;
                 top: 0;
                 left: 0;
+                @media screen and (max-width: 1100px) {
+                    font: 16px !important;
+                }
             }
             th {
                 font-size: 1.2em;
@@ -790,6 +982,9 @@ img {
                 padding: 7px;
             }
             tbody {
+                @media screen and (max-width: 1100px) {
+                    font: 14px !important;
+                }
                 .edit,
                 .del {
                     a {
@@ -825,7 +1020,8 @@ img {
         }
     }
     .cadastrar-prod,
-    .entrada-prod {
+    .entrada-prod,
+    .saida-prod {
         width: 80%;
         margin: auto;
         .msg {
@@ -850,6 +1046,9 @@ img {
             padding: 50px;
             height: fit-content;
             border-radius: 10px;
+            @media screen and (max-width: 1300px) {
+                width: 80%;
+            }
             h1 {
                 color: $preto;
                 margin-bottom: 15px;
@@ -879,7 +1078,6 @@ img {
             }
             .categoria {
                 select {
-                    border: 1px solid #ff3d3d;
                     cursor: pointer;
                     padding: 5px 8px;
                     border-radius: 5px;
@@ -889,9 +1087,10 @@ img {
                     -moz-appearance: none;
                     appearance: none;
                     text-align: center;
-                    width: inherit;
+                    width: fit-content;
+
                     option {
-                        text-align: center;
+                        text-align: start;
                         margin: 0 auto;
                         width: fit-content;
                     }
@@ -988,6 +1187,9 @@ img {
         padding: 50px;
         height: fit-content;
         border-radius: 10px;
+        @media screen and (max-width: 1300px) {
+            width: 80%;
+        }
         h1 {
             color: $preto;
             margin-bottom: 15px;

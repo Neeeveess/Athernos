@@ -23,11 +23,13 @@
                 $qtdLote = $rows->quantidade;                         
             }
             if($qtd <= $qtdLote){
-                $param = $qtdLote - $qtd; 
-                // $obj->update("lotes","quantidade = '$param'",$cond); 
+                $param = $qtdLote - $qtd;                 
                 $obj->call("registrar_saida('$dadosLote[id_lote]','$qtd')");
+                ?>
+                <script>alert('Saída feita!')</script>
+                <?php
             }else{
-                echo "valor acima";
+                header('Location:'.BASEURL.'nav/produto/saidaProd.php?msg=1'); 
             }
         }     
     }
@@ -39,26 +41,54 @@
 
 <body class="main-index">
     <?php include_once ABSPATH.'layout/menu-lateral.php';?>
-    <form method='post'>
-        <label for="dados[id_produto]">Id do Produto:</label>
-        <input type = "text" name = "dados[id_produto]" id="id_produto">
+    <section class="saida-prod">
+        <section class="msg">
+            <?php
+                    if(isset($_GET['msg']) and $_GET['msg'] == '1'){
+            ?>
+                    <div class="msg-alerta" roles="alert">Quantidade acima!</div>
+            <?php
+                    }
+            ?>
+        </section>
+        <form method='post' class="box-cadastro">
+            <h1>Saída de Produtos</h1>
+            <div class="textfield">
+                <label for="dados[id_produto]">Id do Produto:</label>
+                <input type = "text" name = "dados[id_produto]" id="id_produto" required>
+            </div>
+            
 
-        <label for="dados[codigo]">Codigo:</label>
-        <input type = "text" name = "dados[codigo]" value readonly id="codigo_produto">
+            <div class="textfield">
+                <label for="dados[codigo]">Codigo:</label>
+                <input type = "text" name = "dados[codigo]" value readonly id="codigo_produto">
+            </div>
+            
 
-        <label for="dados[nome]">Nome:</label>
-        <input type = "text" name = "dados[nome]" readonly id="nome_produto">        
+            <div class="textfield">
+                <label for="dados[nome]">Nome:</label>
+                <input type = "text" name = "dados[nome]" readonly id="nome_produto">   
+            </div>
+                
 
-        <label for="dadosLote[id_lote]">Lotes:</label>
-        <select name="dadosLote[id_lote]" id="lotes">
-            <option>Selecione o Lote</option>
-        </select>
+            <div class="textfield categoria">
+                <label for="dadosLote[id_lote]">Lotes:</label>
+                <select name="dadosLote[id_lote]" id="lotes">
+                    <option>Selecione o Lote</option>
+                </select>
+            </div>
+            
 
-        <label for="qtd">Quantidade:</label>
-        <input type = "int" name = "qtd">
-        
-        <input type="submit">
-    </form>
+            <div class="textfield">
+                <label for="qtd">Quantidade:</label>
+                <input type = "number" min="1" name = "qtd">
+            </div>
+            
+            
+            <input type="submit">
+        </form>
+    </section>
+   
     
 </body>
 
@@ -100,7 +130,9 @@ $(document).ready(() => {
                     option += '<option>'+ 'Selecione o Lote' +'</option>';		
                     if (dados2.length > 0){
                         $.each(dados2, function(i, obj){
-                            option += `<option value =${obj.codigo}>Lote: ${obj.codigo} - Quantidade: ${obj.quantidade}</option>`;
+                            if(!(obj.quantidade <= 0)){
+                                option += `<option value =${obj.codigo}>Lote: ${obj.codigo} - Quantidade: ${obj.quantidade}</option>`;
+                            }
                         })
                     }
                     $('#lotes').html(option).show();

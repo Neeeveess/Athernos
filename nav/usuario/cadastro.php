@@ -32,12 +32,11 @@
 
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
 
 <?php include_once ABSPATH.'layout/header.php';?>
 
-<body class="main-login">
+<body class="main-index">
+<?php include_once ABSPATH.'layout/menu-lateral.php';?>
         <form method="post" class="form" autocomplete="off">
             <h1>Cadastrar Usuário</h1>
             <?php
@@ -103,4 +102,3 @@
 		});
     
 </script>
-</html>

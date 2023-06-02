@@ -51,7 +51,7 @@
                 <div class="textfield categoria">
                     <label for="Categoria" class="">Categoria:</label>
     
-                    <select name="dados[id_categoria]" id="" require class="select2">             
+                    <select name="dados[id_categoria]" id="" require class="select2" >             
                         <?php
                         $selectcat = $obj->select("*","categoria");
                         if ($selectcat->num_rows > 0){
@@ -120,15 +120,15 @@
             </div>
             <div class="textfield-radio">
             <label>
-                    <input type="radio" name="dados[nivel]" value="2" required>
+                    <input type="radio" name="dados[nivel]" value="2" <?php if ($nivelUsu == 2){echo " checked";} ?> required>
                     Administrador
                 </label>
                 <label>
-                    <input type="radio" name="dados[nivel]" id="editor" value="1">
+                    <input type="radio" name="dados[nivel]" id="editor" value="1" <?php if ($nivelUsu == 1){echo " checked";} ?>>
                     Editor
                 </label>
                 <label>
-                    <input type="radio" name="dados[nivel]" id="user" value="0">
+                    <input type="radio" name="dados[nivel]" id="user" value="0" <?php if ($nivelUsu == 0){echo " checked";} ?>>
                     Normal
                 </label>
             </div>

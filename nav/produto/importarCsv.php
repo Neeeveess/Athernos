@@ -34,13 +34,20 @@
                 <div class="textfield">
                     <label><input type="file" name="file"> </label>
                 </div>
-                <button type="submit" class="">Enviar</button>
+                <button type="submit" class="botao-enviar">Enviar</button>
+                <span class="loader"></span>
                 <a class="" href="<?php echo BASEURL;?>index.php">Voltar</a>
             </form>
     </section>
-            
+            <script>
+                const botao =  document.querySelector(".botao-enviar")
 
-    <!-- JavaScript Bundle with Popper -->
+                botao.addEventListener("click", function(){
+                    document.querySelector(".loader").style.display = 'block';
+			        botao.style.display = 'none';
+                });
+                
+            </script>
 
 
 </body>
