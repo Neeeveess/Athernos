@@ -20,6 +20,8 @@
             <tr>
 
                 <th class="codigo" scope="col">Tipo de transação</th>
+                <th class="codigo" scope="col">ID Produto</th>
+                <th class="codigo" scope="col">Nome</th>
                 <th class="nome" scope="col">ID do lote</th>
                 <th class="nome" scope="col">Quantidade</th>
                 <th class="total" scope="col">Data</th>
@@ -37,6 +39,8 @@
                         <tr>
 
                             <td><?php echo $rows->tipo;?></td>
+                            <td><?php echo $rows->id_produto;?></td>
+                            <td><?php echo $rows->nome_produto;?></td>
                             <td><?php echo $rows->id_lotes;?></td>
                             <td><?php echo $rows->quantidade;?></td>
                             <td><?php echo date('d/m/Y - H:i:s', $data_manipulacao);?></td>

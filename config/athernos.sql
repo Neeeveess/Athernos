@@ -51,6 +51,8 @@ GROUP BY produtos.codigo;
 create table log_lotes(
     id int primary key auto_increment,
     tipo varchar(45),
+    id_produto int,
+    nome_produto varchar(45),
     id_lotes int,
     quantidade int,
     data_manipulacao datetime
@@ -59,11 +61,14 @@ create table log_lotes(
 Delimiter $
 
 create trigger entrada_lotes
-after insert on lotes
-for each row 
-begin 
-    insert into log_lotes(id_lotes,tipo,quantidade,data_manipulacao) 
-    values(new.codigo,"Entrada",new.quantidade,now());
+    after insert on lotes
+    for each row 
+    begin 
+    declare nome_prod varchar(45);
+        select nome into nome_prod from produtos where id = new.id_produto;
+
+        insert into log_lotes(id_produto,nome_produto,id_lotes,tipo,quantidade,data_manipulacao) 
+        values(new.id_produto,nome_prod,new.codigo,"Entrada",new.quantidade,now());
 end $
 
 CREATE PROCEDURE registrar_saida(
@@ -72,9 +77,13 @@ CREATE PROCEDURE registrar_saida(
 )
 BEGIN
     DECLARE quantidade_atual INT;
+    DECLARE id_prod int;
+    DECLARE nome_prod varchar(45);
+
 
     -- Obtém a quantidade atual do produto
-    SELECT quantidade INTO quantidade_atual FROM lotes WHERE codigo = codigo_id;
+    SELECT quantidade,id_produto INTO quantidade_atual,id_prod FROM lotes WHERE codigo = codigo_id;
+    SELECT nome INTO nome_prod FROM produtos WHERE id = id_prod;    
 
     -- Verifica se a quantidade de saída é menor ou igual à quantidade atual
     IF quantidade_saida <= quantidade_atual THEN
@@ -82,8 +91,8 @@ BEGIN
         UPDATE lotes SET quantidade = quantidade_atual - quantidade_saida WHERE codigo = codigo_id;
 
         -- Insere o registro de saída no histórico
-        INSERT INTO log_lotes (id_lotes,tipo,quantidade,data_manipulacao)
-        VALUES (codigo_id,"Saida", quantidade_saida,now());
+        INSERT INTO log_lotes (id_produto,nome_produto,id_lotes,tipo,quantidade,data_manipulacao)
+        VALUES (id_prod,nome_prod,codigo_id,"Saida", quantidade_saida,now());
     ELSE
         -- Caso a quantidade de saída seja maior que a quantidade atual, emite uma mensagem de erro
         SIGNAL SQLSTATE '45000'
