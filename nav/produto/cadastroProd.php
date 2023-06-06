@@ -35,8 +35,10 @@
     if(isset($_POST['dados'])and !empty($_POST['dados'])){
         $dados = $_POST['dados'];
         $cond = "codigo='$dados[codigo]'";   
+        $cond2 = "nome='$dados[nome]'";   
         $select = $obj->select("codigo","produtos", $cond);
-        if ($select->num_rows > 0){
+        $select2 = $obj->select("nome","produtos", $cond2);
+        if (($select->num_rows > 0) or ($select2->num_rows > 0)){
             header('Location:'.BASEURL.'nav/produto/cadastroProd.php?msg=1');    
         }else{
             $obj->insert("produtos",$dados);
@@ -57,7 +59,7 @@
             <?php
                     if(isset($_GET['msg']) and $_GET['msg'] == '1'){
             ?>
-                    <div class="msg-alerta" roles="alert">Código ja cadastrado!</div>
+                    <div class="msg-alerta" roles="alert">Código ou Nome já Existe!</div>
             <?php
                     }
             ?>

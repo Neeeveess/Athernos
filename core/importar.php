@@ -28,8 +28,10 @@
                 $dado['id_categoria'] = mb_strtoupper(utf8_encode($dados[2]));
                
                 $cond = "codigo ='$dado[codigo]'";                             
+                $cond2 = "nome ='$dado[nome]'";                             
                 $select3 = $obj->select("codigo","produtos", $cond);
-                if ($select3->num_rows > 0){
+                $select4 = $obj->select("nome","produtos", $cond2);
+                if (($select3->num_rows > 0) or ($select4->num_rows > 0)){
                     while($rows=$select3->fetch_object()){
                             if(!in_array($rows->codigo, $array)){                                
                                 array_push($array,$rows->codigo);
@@ -92,7 +94,7 @@
                 }
                 $i++;          
         }
-        //SE JA EXISTE CADASTRO SO INSERE LOTES E FALA QUAL OS PRODUTOS SAO
+        // // SE JA EXISTE CADASTRO SO INSERE LOTES E FALA QUAL OS PRODUTOS SAO
         // if(!is_null($array)){            
         //     foreach ($array as $valor){
         //         echo $valor." Já existe! Lotes Inseridos <br>";
