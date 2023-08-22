@@ -5,7 +5,7 @@
     
     session_start();
     
-    $titulo = "Saida de Produtos - Athernos";
+    $titulo = "Relatório entrada/saída - Athernos";
     if(!isset($_SESSION['email']) or $_SESSION['nivel']<2){
         header('Location:'.BASEURL.'index.php');
     }

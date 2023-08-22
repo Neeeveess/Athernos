@@ -101,7 +101,7 @@
                     $param = rtrim($param, ",");
                 }
                 $update = $obj->update("usuarios", $param, $cond);
-                header('Location:'.BASEURL.'nav/usuario/usuarios.php');  
+                header('Location:'.BASEURL.'nav/usuario/usuarios.php');   
             }
         ?>
         <section class="cadastrar-prod">
@@ -116,7 +116,7 @@
             <div class="textfield">
                 <label for="nome" class="">Nome:</label>
                 <input type="text" name="dados[nome]" 
-                value = "<?php echo $nomeUsu;?>"onChange= "javascript:this.value=this.value.toUpperCase()" required>
+                value = "<?php echo $nomeUsu;?>" required>
             </div>
             <div class="textfield-radio">
             <label>
@@ -134,7 +134,7 @@
             </div>
 
             <input type= "submit">
-            <a href="<?php echo BASEURL;?>index.php">Voltar</a>
+            <a href="<?php echo BASEURL;?>nav/usuario/usuarios.php">Voltar</a>
         </form>
         </section>
         <?php

@@ -53,7 +53,7 @@
                     <th class="custo" scope="col">Custo (UN)</th>
                     <th class="menorVal" scope="col">Menor Validade</th>
                     <th class="maiorVal" scope="col">Maior Validade</th>
-                    <?php if($_SESSION['nivel'] > 1){?>
+                    <?php if($_SESSION['nivel'] > 0){?>
                     <th class="edit" scope="col">...</th>
                     <?php }?>
                     <th class="visuModal" scope="col"></th>
@@ -81,9 +81,9 @@
                     <td class="categoria"><?php echo $rows->categoria?></td>
                     <td class="total"><?php if($rows->total !== null){echo $rows->total;}else{echo '-';}?></td>
                     <td class="custo"> <?php if($rows->custo !== null){echo "R$ ".number_format($rows->custo,2,",","");}else{echo "-";}?></td>
-                    <td class="menorVal"><?php if(date('d/m/Y', $menor_validade) == '01/01/1970'){echo '-';}else{echo date('d/m/Y', $menor_validade);}?></td>
-                    <td class="maiorVal"><?php if(date('d/m/Y', $maior_validade) == '01/01/1970'){echo '-';}else{echo date('d/m/Y', $maior_validade);}?></td>
-                    <?php if($_SESSION['nivel'] > 1){?>
+                    <td class="menorVal"><?php if((date('d/m/Y', $menor_validade) == '01/01/1970')or (date('d/m/Y', $menor_validade) == '31/12/1969') ){echo '-';}else{echo date('d/m/Y', $menor_validade);}?></td>
+                    <td class="maiorVal"><?php if((date('d/m/Y', $maior_validade) == '01/01/1970')or (date('d/m/Y', $maior_validade) == '31/12/1969')){echo '-';}else{echo date('d/m/Y', $maior_validade);}?></td>
+                    <?php if($_SESSION['nivel'] > 0){?>
                     <td class="edit">
                         <a href="<?php echo BASEURL;?>core/editar.php?idProd=<?php echo $rows->id?>">
                         <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 

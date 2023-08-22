@@ -42,7 +42,7 @@
                     <th class="nome" scope="col">Nome</th>
                     <th class="nome" scope="col">Nível</th>
                     <th class="edit" scope="col">...</th>
-                    <th class="visuModal" scope="col">...</th>
+                    <!-- <th class="visuModal" scope="col">...</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -99,14 +99,14 @@
                                 </g>
                             </svg>
                         </td>
-                        <td class="delete">
+                        <!-- <td class="delete">
                             <a href="<?php echo BASEURL;?>core/deletar.php?idUsu=<?php echo $rows->id?>">
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64" height="64" viewBox="0 0 64 64">
                                     <path fill="#000000" height="800px" width="800px" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M28.392,14.981c-0.512-9.22,7.683-11.941,7.875-0.224c4.37-0.105,9.668,0.672,9.604,2.081c-0.105,2.306-5.698,3.169-14.982,3.393	c-11.523,0.278-17.48-1.984-17.48-4.098c0-1.409,2.433-4.482,19.08-4.994c20.223-0.622,23.178,5.698,16.007,9.476l-0.96,31.95	c-0.597,6.915-29.858,6.787-29.815,0l-0.95-26.219c-0.115-3.75,5.877-3.578,5.987,1.025l0.519,21.683	C23.368,52.834,29,52.725,29,48.985v-21.71c0-3.968,5.986-4.01,6-0.01l0.073,21.852c0.013,3.728,5.854,3.692,5.927-0.01	l0.307-21.704c0,0-0.064-3.201,1.793-4.546">
 
                                     </path>
                                 </svg>
-                        </td>
+                        </td> -->
                     <?php }?>
                     <?php }?>
                     
