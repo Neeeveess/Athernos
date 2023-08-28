@@ -25,7 +25,7 @@
     <main class="corpo-produto">
         <section class="cabecalho">
             <div class="box-busca">
-                <form action="" method="get">
+                <form action="" method="get" autocomplete="off">
                 <input class="busca" name="search" type="text" placeholder="Busca...">
                 <button type="submit" class="btn-busca">
                 <svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve" fill="#ffffff" stroke="#ffffff">

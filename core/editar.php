@@ -32,7 +32,9 @@
                     $param = rtrim($param, ",");
                 }
                 $update = $obj->update("produtos", $param, $cond);
-                header('Location:'.BASEURL.'nav/produto/produtos.php');  
+                ?> 
+                <script> location.replace("../nav/produto/produtos.php"); </script>
+                <?php 
             }
         ?>
         <section class="cadastrar-prod">
@@ -51,7 +53,7 @@
                 <div class="textfield categoria">
                     <label for="Categoria" class="">Categoria:</label>
     
-                    <select name="dados[id_categoria]" id="" require class="select2" >             
+                    <select name="dados[id_categoria]" id="" require class="select2">             
                         <?php
                         $selectcat = $obj->select("*","categoria");
                         if ($selectcat->num_rows > 0){
@@ -101,7 +103,9 @@
                     $param = rtrim($param, ",");
                 }
                 $update = $obj->update("usuarios", $param, $cond);
-                header('Location:'.BASEURL.'nav/usuario/usuarios.php');   
+                ?> 
+                <script> location.replace("../nav/usuario/usuarios.php"); </script>
+                <?php 
             }
         ?>
         <section class="cadastrar-prod">
@@ -143,6 +147,6 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('.select2').select2();
+            $('.select2').select2({ language: "pt-br"});
         });
     </script>
