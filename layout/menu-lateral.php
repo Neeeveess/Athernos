@@ -2,7 +2,7 @@
 <sidebar id="menu-lateral" class="menu-lateral">
     <div class="conteudo-esquerdo">
         <div class="principal">
-            <a class="principal__logo" href=""><img src="<?php echo BASEURL;?>assets/img/logo-athernos.png" alt=""></a>
+            <a class="principal__logo" href="<?php echo BASEURL;?>index.php"><img src="<?php echo BASEURL;?>assets/img/logo-athernos.png" alt=""></a>
             <section class="usuario">
                 <h2 class="principal__title">                    
                     <?php echo "Bem vindo " . "<br><span class='principal__title--destack'>" . $_SESSION['nome'] . "</span>"; ?>

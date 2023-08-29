@@ -13,7 +13,6 @@
             if ($order !== null) {
                 $sql .= " ORDER BY $order";
             }
-            
             return $this->conn->query($sql);
         }
     
