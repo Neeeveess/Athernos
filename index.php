@@ -1,24 +1,5 @@
 <?php 
     require_once 'config.php';
-    require_once ABSPATH."classes/Crud.php";
-    $crud = new Crud();
-    $select = $crud->select('c.id, c.nome AS categoria,
-             COUNT(p.id) AS quantidade_de_produtos',
-            'categoria c
-            LEFT JOIN produtos p ON c.id = p.id_categoria
-            GROUP BY c.id, c.nome');
-$categorias = [];
-$quantidades = [];
-
-if ($select->num_rows > 0) {
-    while ($linhas = $select->fetch_object()) {
-        $categorias[] = $linhas->categoria;
-        $quantidades[] = $linhas->quantidade_de_produtos;
-    }
-}
-
-// Ordenar os arrays de categorias e quantidades em ordem decrescente
-array_multisort($quantidades, SORT_DESC, $categorias);
 
     $titulo = "Pagina Inicial - Athernos";
     session_start();
@@ -52,6 +33,29 @@ array_multisort($quantidades, SORT_DESC, $categorias);
         </div>  
     </main>
 </body>
+<?php 
+
+require_once ABSPATH."classes/Crud.php";
+$crud = new Crud();
+$select = $crud->select('c.id, c.nome AS categoria,
+         COUNT(p.id) AS quantidade_de_produtos',
+        'categoria c
+        LEFT JOIN produtos p ON c.id = p.id_categoria
+        GROUP BY c.id, c.nome');
+$categorias = [];
+$quantidades = [];
+
+if ($select->num_rows > 0) {
+while ($linhas = $select->fetch_object()) {
+    $categorias[] = $linhas->categoria;
+    $quantidades[] = $linhas->quantidade_de_produtos;
+}
+}
+
+// Ordenar os arrays de categorias e quantidades em ordem decrescente
+array_multisort($quantidades, SORT_DESC, $categorias);
+
+?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
         const ctx = document.getElementById('myChart');
