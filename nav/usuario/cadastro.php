@@ -87,18 +87,3 @@
             <a href="<?php echo BASEURL;?>index.php">Voltar</a>
         </form>
 </body>
-<script>
-    jQuery(document).ready(function($) {
-        $(".input2").each(function () {
-		$(this).on("blur", function () {
-			if ($(this).val().trim() != "") {
-				$(this).addClass("has-val");
-			} else {
-				$(this).removeClass("has-val");
-			}
-		});
-	});    
-			
-		});
-    
-</script>

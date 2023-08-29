@@ -126,6 +126,9 @@ input[type="radio"] {
 img {
     user-select: none;
 }
+input::placeholder {
+    color: #322796d0;
+}
 .modal {
     .modal-dialog {
         width: 80vw;
@@ -224,7 +227,7 @@ img {
         bottom: 0;
         z-index: 1;
 
-        background: radial-gradient(circle, #00000000 0%, #00000065 100%);
+        background: radial-gradient(circle, #00000000 0%, #8d5aec4f 100%);
     }
     .form {
         @extend %d-flex;
@@ -328,7 +331,6 @@ img {
             }
         }
         input[type="submit"] {
-            background-color: $white;
             border: none;
             width: 100%;
             height: 50px;
@@ -339,12 +341,14 @@ img {
             font-size: 1.8rem;
             font-weight: bold;
             letter-spacing: 2px;
-            color: $black-text;
             border: 1px solid #ffffff33;
-            transition: 0.1s;
+            transition: $transition-100;
+            color: $black-text;
+            color: $white;
+            background-color: $secundary;
             &:hover {
-                color: $black-text;
-                background-color: #f5f5f5;
+                transition: $transition-100;
+                background-color: #854eeb;
             }
             // box-shadow: 0px 0px 10px 1px #00000052;
         }
@@ -435,12 +439,17 @@ img {
             width: 100%;
         }
         h1 {
-            color: $black-text;
+            color: $secundary;
             font-size: 3.6rem;
             font-weight: 700;
             letter-spacing: 2px;
             margin-bottom: 20px;
             text-transform: uppercase;
+        }
+        p {
+            color: $black-text;
+            font-size: 1.8rem;
+            font-weight: 400;
         }
         .textfield {
             padding: 5px 0;
@@ -524,7 +533,6 @@ img {
             }
         }
         input[type="submit"] {
-            background-color: $white;
             border: none;
             width: 50%;
             height: 50px;
@@ -535,12 +543,13 @@ img {
             font-size: 1.8rem;
             font-weight: bold;
             letter-spacing: 2px;
-            color: $black-text;
             border: 1px solid #ffffff33;
-            transition: 0.1s;
+            transition: $transition-100;
+            color: $white;
+            background-color: $secundary;
             &:hover {
-                color: $black-text;
-                background-color: #f5f5f5;
+                transition: $transition-100;
+                background-color: #854eeb;
             }
         }
         a {
@@ -699,13 +708,15 @@ img {
                 }
             }
             .footer {
-                display: none;
                 width: 100%;
                 @extend %d-flex;
                 justify-content: space-between;
                 .box-conta {
+                    position: relative;
                     .itens-conta {
-                        display: none;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
                     }
                 }
             }
@@ -756,7 +767,7 @@ img {
     }
     .corpo-produto {
         width: 100%;
-        margin: 20px;
+        padding: 0px 20px 20px 20px;
         overflow: auto;
         @media screen and (max-width: 1100px) {
             margin: 10px;
@@ -768,8 +779,28 @@ img {
         }
         > .cabecalho {
             display: flex;
-            justify-content: end;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
             margin-bottom: 20px;
+            .limpar {
+                @extend %d-flex;
+                text-decoration: none;
+                background-color: $secundary;
+                border: none;
+                width: 10%;
+                height: 40px;
+                padding: 10px;
+                border-radius: 5px;
+                margin: 1rem 0;
+                font-size: 1.8rem;
+                color: $white;
+                transition: $transition-100;
+                &:hover {
+                    transition: $transition-100;
+                    background-color: #854eeb;
+                }
+            }
             .importar {
                 font-size: 1.2em;
                 font-weight: 700;
@@ -957,7 +988,7 @@ img {
                 width: 80%;
             }
             h1 {
-                color: $black-text;
+                color: $secundary;
                 font-size: 3.6rem;
                 font-weight: 600;
                 margin-bottom: 15px;
@@ -1046,7 +1077,6 @@ img {
             }
 
             input[type="submit"] {
-                background-color: $white;
                 border: none;
                 width: 50%;
                 height: 50px;
@@ -1057,12 +1087,14 @@ img {
                 font-size: 1.8rem;
                 font-weight: bold;
                 letter-spacing: 2px;
-                color: $black-text;
                 border: 1px solid #ffffff33;
-                transition: 0.1s;
+                transition: $transition-100;
+                color: $black-text;
+                color: $white;
+                background-color: $secundary;
                 &:hover {
-                    color: $black-text;
-                    background-color: #f5f5f5;
+                    transition: $transition-100;
+                    background-color: #854eeb;
                 }
             }
             a {
@@ -1099,7 +1131,6 @@ img {
                             color: $black-text;
                         }
                         input[type="submit"] {
-                            background-color: $white;
                             border: none;
                             width: 40%;
                             height: 50px;
@@ -1110,12 +1141,14 @@ img {
                             font-size: 1.8rem;
                             font-weight: bold;
                             letter-spacing: 2px;
-                            color: $black-text;
                             border: 1px solid #ffffff33;
-                            transition: 0.1s;
+                            transition: $transition-100;
+                            color: $black-text;
+                            color: $white;
+                            background-color: $secundary;
                             &:hover {
-                                color: $black-text;
-                                background-color: #f5f5f5;
+                                transition: $transition-100;
+                                background-color: #854eeb;
                             }
                         }
                     }
@@ -1141,7 +1174,7 @@ img {
             width: 80%;
         }
         h1 {
-            color: $black-text;
+            color: $secundary;
             margin-bottom: 15px;
             font-size: 3.6rem;
             font-weight: 600;
@@ -1179,7 +1212,7 @@ img {
                 letter-spacing: 2px;
                 color: $black-text;
                 border: 1px solid #ffffff33;
-                transition: 0.1s;
+                transition: $transition-100;
                 &:hover {
                     color: $black-text;
                     background-color: #f5f5f5;

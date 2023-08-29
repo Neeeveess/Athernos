@@ -16,6 +16,7 @@
     ?>
     <main class="corpo-produto page">
         <section class="cabecalho">
+            <a href="<?php echo BASEURL;?>nav/usuario/usuarios.php" class="limpar" > Limpar Filtro</a>
             <div class="box-busca">
                 <form action="" method="get">
                 <input class="busca" name="search" type="text" placeholder="Busca...">

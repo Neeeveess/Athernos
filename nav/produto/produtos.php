@@ -24,6 +24,7 @@
     ?>
     <main class="corpo-produto page">
         <section class="cabecalho">
+            <a href="<?php echo BASEURL;?>nav/produto/produtos.php" class="limpar" > Limpar Filtro</a>
             <div class="box-busca">
                 <form action="" method="get" autocomplete="off">
                 <input class="busca" name="search" type="text" placeholder="Busca...">
@@ -164,7 +165,6 @@
                 data: 'id='+produtoid
             })
             .done(function(data){
-                //console.log(data);	
                 $('#ModalContent').html('');
                 $('#ModalContent').html(data); // load response
             })
@@ -172,8 +172,6 @@
                 $('#ModalContent').html('<i class="glyphicon glyphicon-info-sign"></i> Nenhuma entrada encontrada!');
             })
   		}).on("hide.bs.modal", function (event) {            
-			// $(this).find("#ModalLotesBody").html("");
-            // $('.modal-backdrop').modal('hide'); 
 		});
   	});
 </script>
