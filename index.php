@@ -45,8 +45,8 @@ array_multisort($quantidades, SORT_DESC, $categorias);
 <body class="main-index">
     <?php include_once ABSPATH.'layout/menu-lateral.php';?>
     <main class="corpo">
-        <h1>Bem vindo <br/>ao<span> Athernos</span></h1>
-        <p>Esse é nosso projeto de estoque</p>
+        <!-- <h1>Bem vindo <br/>ao<span> Athernos</span></h1>
+        <p>Esse é nosso projeto de estoque</p> -->
         <div class="chart-container" style="position: relative; height:500px; width:500px">
         <canvas id="myChart"></canvas>
         </div>  
