@@ -22,7 +22,7 @@
      
     
     ?>
-    <main class="corpo-produto">
+    <main class="corpo-produto page">
         <section class="cabecalho">
             <div class="box-busca">
                 <form action="" method="get" autocomplete="off">

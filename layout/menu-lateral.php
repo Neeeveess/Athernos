@@ -18,19 +18,19 @@
                     </span>
                     <div class="nav-bar__itens">
                             <a class="nav-bar__item" href="<?php echo BASEURL;?>nav/produto/produtos.php">Listar Produtos</a></li>
-                        <?php //if($_SESSION['nivel'] >= 1){ ?> 
+                        <?php if($_SESSION['nivel'] >= 1){ ?> 
                             <a class="nav-bar__item" href="<?php echo BASEURL;?>nav/produto/importarCsv.php">Importar Planilha</a>
                             <a class="nav-bar__item" href="<?php echo BASEURL;?>nav/produto/cadastroProd.php">Cadastrar Produtos</a>
                             <a class="nav-bar__item" href="<?php echo BASEURL;?>nav/produto/entradaProd.php">Entrada de Produtos</a>
                             <a class="nav-bar__item" href="<?php echo BASEURL;?>nav/produto/saidaProd.php">Saída de Produtos</a>
                         
-                        <!-- <?php //} if($_SESSION['nivel'] >= 2){?> -->
+                         <?php } if($_SESSION['nivel'] >= 2){?> 
                             <a class="nav-bar__item" href="<?php echo BASEURL;?>nav/produto/relatorio.php">Relatório de Entrada/Saída</a>
-                        <!-- <?php //} ?> -->
+                         <?php } ?> 
                     </div>
                 </div>
                 <div class="box-nav-bar">
-                    <!-- <?php //if($_SESSION['nivel'] > 1){ ?> -->
+                     <?php if($_SESSION['nivel'] > 1){ ?> 
                         <span class="nav-bar__title">
                             <svg class="ico-nav" xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512"><path d="M12,16a4,4,0,1,1,4-4A4,4,0,0,1,12,16Zm0-6a2,2,0,1,0,2,2A2,2,0,0,0,12,10Zm6,13A6,6,0,0,0,6,23a1,1,0,0,0,2,0,4,4,0,0,1,8,0,1,1,0,0,0,2,0ZM18,8a4,4,0,1,1,4-4A4,4,0,0,1,18,8Zm0-6a2,2,0,1,0,2,2A2,2,0,0,0,18,2Zm6,13a6.006,6.006,0,0,0-6-6,1,1,0,0,0,0,2,4,4,0,0,1,4,4,1,1,0,0,0,2,0ZM6,8a4,4,0,1,1,4-4A4,4,0,0,1,6,8ZM6,2A2,2,0,1,0,8,4,2,2,0,0,0,6,2ZM2,15a4,4,0,0,1,4-4A1,1,0,0,0,6,9a6.006,6.006,0,0,0-6,6,1,1,0,0,0,2,0Z"/></svg>
                             Usuarios
@@ -41,7 +41,7 @@
                             <a class="nav-bar__item" href='<?php echo BASEURL;?>nav/usuario/usuarios.php'>Listar Usuários</a>
                             <a class="nav-bar__item" href='<?php echo BASEURL;?>nav/usuario/cadastro.php'>Cadastrar Usuario</a>
                         </div>
-                    <!-- <?php //} ?> -->
+                     <?php } ?> 
                 </div>
             </nav>
         </div>

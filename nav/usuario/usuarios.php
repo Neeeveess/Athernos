@@ -14,7 +14,7 @@
 <body class="main-index">
     <?php include_once ABSPATH.'layout/menu-lateral.php';
     ?>
-    <main class="corpo-produto">
+    <main class="corpo-produto page">
         <section class="cabecalho">
             <div class="box-busca">
                 <form action="" method="get">

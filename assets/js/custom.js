@@ -32,7 +32,6 @@ jQuery(document).ready(function ($) {
 
     //Notificação de Mensagem
     const divMessage = $(".div-alert");
-    let msg = "Teste";
 
     function showMessage(msg, type = "success") {
         const message = $("<div>", {
@@ -45,18 +44,17 @@ jQuery(document).ready(function ($) {
         }, 3000);
     }
 
-    // menuHamburguer.on("click", () => {
-    //     showMessage(msg, "success");
-    // });
-
     //Listar Nav Bar
     const titulo = $(".nav-bar__title");
 
     titulo.each(function () {
-        $(this).on("click", () => {
+        const key = `listState_${$(this).index()}`;
+
+        const toggleItens = () => {
             const itens = $(this).siblings();
             const svgCima = $(this).find(".svg-cima");
             const svgBaixo = $(this).find(".svg-baixo");
+
             itens.toggleClass("hide");
             if (itens.hasClass("hide")) {
                 svgBaixo.hide();
@@ -65,6 +63,21 @@ jQuery(document).ready(function ($) {
                 svgBaixo.show();
                 svgCima.hide();
             }
-        });
+
+            // Update local storage
+            if (itens.hasClass("hide")) {
+                localStorage.setItem(key, "hidden");
+            } else {
+                localStorage.removeItem(key);
+            }
+        };
+
+        // Check and apply initial state
+        const initialState = localStorage.getItem(key);
+        if (initialState === "hidden") {
+            toggleItens();
+        }
+
+        $(this).on("click", toggleItens);
     });
 });

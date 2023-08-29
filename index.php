@@ -27,16 +27,4 @@
         <p>Esse é nosso projeto de estoque</p>
     </main>
 </body>
-<!-- <script>
-    var divNome = $(".menu-lateral-mobile");
-    $('.checkbox').click (function(e) {
-        $(divNome).show();
-    });
-    
-    $(document).mouseup(function(e){
-    if (!divNome.is(e.target) && divNome.has(e.target).length === 0){
-        $(divNome).hide();
-    }
-});
-</script> -->
 </html>
