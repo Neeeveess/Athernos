@@ -66,52 +66,49 @@
 <body class="main-index">
     <?php include_once ABSPATH.'layout/menu-lateral.php';?>
     <main class="corpo">
-        <!-- <h1>Bem vindo <br/>ao<span> Athernos</span></h1>
-        <p>Esse é nosso projeto de estoque</p> -->
         <section class="box-grid">
             <div class="total-produtos">
-                <h2>Qtd de produtos cadastrados</h2>
-                <?php 
-                
-                if ($selectProdutos->num_rows > 0) {
-                    while ($linhas = $selectProdutos->fetch_object()) {
-                        echo $linhas->qtd;
-                    }
-                }
-                
-                ?>
-            </div>
-            <div class="ultimas-entradas-saidas">
-            <h2>Entradas</h2>
-                <?php  if ($select3Entradas->num_rows > 0) {
-                    while ($linhas = $select3Entradas->fetch_object()) {
-                        
-                        echo $linhas->ID_Produto.' - ';
-                        echo $linhas->Nome.' - ';
-                        echo $linhas->ID_do_Lote.' - ';
-                        echo $linhas->Quantidade.' - ';
-                        echo $linhas->Data_de_Entrada."<br>";
-                    }
-                } ?>
-                <h2>Saidas</h2>
-                <?php if ($select3Saidas->num_rows > 0) {
-                    while ($linhas = $select3Saidas->fetch_object()) {
-                        
-                        echo $linhas->ID_Produto.' - ';
-                        echo $linhas->Nome.' - ';
-                        echo $linhas->ID_do_Lote.' - ';
-                        echo $linhas->Quantidade.' - ';                                           
-                        echo $linhas->Data_da_Saida."<br>";
-                    }
-                } ?>
+                <h2>Quantidade de Produtos Castrados</h2>
+                <div class="value">                
+                    <?php if ($selectProdutos->num_rows > 0) {
+                        while ($linhas = $selectProdutos->fetch_object()) {
+                            echo "<span>".$linhas->qtd."</span>";
+                        }
+                    } ?>
+                </div>
             </div>
             <div class="chart-container" >
-            <h2>Quantidade de Produtos por Categoria</h2>
+                <h2>Quantidade de Produtos por Categoria</h2>
                 <?php if ($select->num_rows > 0) { ?>
-                    <!-- <canvas id="categorias-pizza"></canvas> -->
+                    <div id="piechart"></div>
                 <?php } ?>
-                <div id="piechart" style="width: 900px; height: 500px;"></div>
+                
             </div>  
+            <div class="ultimas-entradas-saidas">
+                <h2>Entradas</h2>
+                    <?php  if ($select3Entradas->num_rows > 0) {
+                        while ($linhas = $select3Entradas->fetch_object()) {
+                            
+                            echo $linhas->ID_Produto.' - ';
+                            echo $linhas->Nome.' - ';
+                            echo $linhas->ID_do_Lote.' - ';
+                            echo $linhas->Quantidade.' - ';
+                            echo $linhas->Data_de_Entrada."<br>";
+                        }
+                    } ?>
+                    <h2>Saidas</h2>
+                    <?php if ($select3Saidas->num_rows > 0) {
+                        while ($linhas = $select3Saidas->fetch_object()) {
+                            
+                            echo $linhas->ID_Produto.' - ';
+                            echo $linhas->Nome.' - ';
+                            echo $linhas->ID_do_Lote.' - ';
+                            echo $linhas->Quantidade.' - ';                                           
+                            echo $linhas->Data_da_Saida."<br>";
+                        }
+                    } ?>
+            </div>
+            
 
         </section>
     </main>
@@ -131,49 +128,6 @@ while ($linhas = $select->fetch_object()) {
 array_multisort($quantidades, SORT_DESC, $categorias);
 
 ?>
-<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-        const ctx = document.getElementById('categorias-pizza');
-        
-        // Dados vindos do PHP
-        const categorias = <?php echo json_encode($categorias); ?>;
-        const quantidades = <?php echo json_encode($quantidades); ?>;
-        
-        // Cores para as fatias
-        const backgroundColors = [
-            'rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)',
-            'rgb(128, 0, 128)', 'rgb(255, 165, 0)', 'rgb(0, 128, 0)',
-            'rgb(128, 128, 128)', 'rgb(186, 85, 211)', 'rgb(0, 255, 255)',
-            'rgb(255, 0, 0)'
-        ];
-        
-
-        const myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: quantidades,
-                    backgroundColor: backgroundColors,
-                }],
-                labels: categorias.map((label, i) => `${label} - ${quantidades[i]}`), // Adiciona os valores numéricos
-            },
-            options: {          
-                pieSliceText: 'label',      
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            color: '#3d4759',
-                            font: {
-                                size: 14
-                            }
-                        }
-                    } 
-                }
-                           
-            }
-        });
-    </script> -->
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
@@ -191,7 +145,7 @@ array_multisort($quantidades, SORT_DESC, $categorias);
       
       for (var i = 0; i < categorias.length; i++) {
         var porcentagem = (quantidades[i] / totalQuantidades) * 100;
-        var label = categorias[i] + '\n' + quantidades[i] + ' (' + porcentagem.toFixed(2) + '%)';
+        var label = categorias[i] + '\n' + quantidades[i] ;
         data.addRow([label, quantidades[i]]);
       }
 
@@ -200,12 +154,12 @@ array_multisort($quantidades, SORT_DESC, $categorias);
           position: 'right', // Posição da legenda
           textStyle: {
             color: '#3d4759',
-            fontSize: 14
+            fontSize: 12
           },
           // Inclui os valores e porcentagens nas legendas
           format: '0.##' // Formato para exibir os números
         },
-        
+        pieSliceText: 'label', // Exibir rótulos nas fatias
         pieStartAngle: 100,
       };
 
