@@ -9,18 +9,33 @@
             LEFT JOIN produtos p ON c.id = p.id_categoria
             GROUP BY c.id, c.nome');
 
+    //SELECT TOTAL DE PRODUTOS
     $selectProdutos = $crud->select('count(id) as qtd','produtos');
-    $select3Entradas = $crud->select('p.id AS id_produto,
-        p.codigo AS codigo_produto,
-        p.nome AS nome_produto,
-        c.nome AS nome_categoria,
-        l.quantidade AS quantidade_lote,
-        l.custo_unit AS custo_lote,
-        l.validade AS validade_lote',
+
+    //SELECT 3 ULTIMAS ENTRADAS
+    $select3Entradas = $crud->select('
+        p.id AS ID_Produto,
+        p.nome AS Nome,
+        l.codigo AS ID_do_Lote,
+        l.quantidade AS Quantidade,
+        l.data_entrada AS Data_de_Entrada',
         'produtos p
-        JOIN categoria c ON p.id_categoria = c.id
-        JOIN lotes l ON p.id = l.id_produto',null,
+        JOIN lotes l ON p.id = l.id_produto',
+        null,
         'l.data_entrada DESC
+        LIMIT 3;');
+
+    //SELECT 3 ULTIMAS SAIDAS
+    $select3Saidas = $crud->select('
+        ll.id_produto AS ID_Produto,
+        p.nome AS Nome,
+        ll.id_lotes AS ID_do_Lote,
+        ll.quantidade AS Quantidade,
+        ll.data_manipulacao AS Data_da_Saida',
+        'log_lotes ll
+        JOIN produtos p ON ll.id_produto = p.id',
+        "ll.tipo = 'Saida'",
+        'll.id DESC
         LIMIT 3;');
 
     $categorias = [];
@@ -67,28 +82,35 @@
                 ?>
             </div>
             <div class="ultimas-entradas-saidas">
-                <?php 
-                
-                if ($select3Entradas->num_rows > 0) {
+            <h2>Entradas</h2>
+                <?php  if ($select3Entradas->num_rows > 0) {
                     while ($linhas = $select3Entradas->fetch_object()) {
                         
-                        echo $linhas->id_produto.' - ';
-                        echo $linhas->codigo_produto.' - ';
-                        echo $linhas->nome_produto.' - ';
-                        echo $linhas->nome_categoria.' - ';
-                        echo $linhas->quantidade_lote.' - ';
-                        echo $linhas->custo_lote.' - ';
-                        echo $linhas->validade_lote."<br>";
+                        echo $linhas->ID_Produto.' - ';
+                        echo $linhas->Nome.' - ';
+                        echo $linhas->ID_do_Lote.' - ';
+                        echo $linhas->Quantidade.' - ';
+                        echo $linhas->Data_de_Entrada."<br>";
                     }
-                }
-                
-                ?>
+                } ?>
+                <h2>Saidas</h2>
+                <?php if ($select3Saidas->num_rows > 0) {
+                    while ($linhas = $select3Saidas->fetch_object()) {
+                        
+                        echo $linhas->ID_Produto.' - ';
+                        echo $linhas->Nome.' - ';
+                        echo $linhas->ID_do_Lote.' - ';
+                        echo $linhas->Quantidade.' - ';                                           
+                        echo $linhas->Data_da_Saida."<br>";
+                    }
+                } ?>
             </div>
-            <div class="chart-container" style="position: relative; height:500px; width:500px">
-            <h2>Categorias ativas</h2>
+            <div class="chart-container" >
+            <h2>Quantidade de Produtos por Categoria</h2>
                 <?php if ($select->num_rows > 0) { ?>
-                    <canvas id="categorias-pizza"></canvas>
+                    <!-- <canvas id="categorias-pizza"></canvas> -->
                 <?php } ?>
+                <div id="piechart" style="width: 900px; height: 500px;"></div>
             </div>  
 
         </section>
@@ -109,7 +131,7 @@ while ($linhas = $select->fetch_object()) {
 array_multisort($quantidades, SORT_DESC, $categorias);
 
 ?>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
         const ctx = document.getElementById('categorias-pizza');
         
@@ -151,6 +173,45 @@ array_multisort($quantidades, SORT_DESC, $categorias);
                            
             }
         });
-    </script>
+    </script> -->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      const categorias = <?php echo json_encode($categorias); ?>;
+      const quantidades = <?php echo json_encode(array_map('intval', $quantidades)); ?>;
+      const totalQuantidades = <?= array_sum($quantidades) ?>;
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Categoria');
+      data.addColumn('number', 'Quantidade de Produtos');
+      
+      for (var i = 0; i < categorias.length; i++) {
+        var porcentagem = (quantidades[i] / totalQuantidades) * 100;
+        var label = categorias[i] + '\n' + quantidades[i] + ' (' + porcentagem.toFixed(2) + '%)';
+        data.addRow([label, quantidades[i]]);
+      }
+
+      var options = {
+        legend: {
+          position: 'right', // Posição da legenda
+          textStyle: {
+            color: '#3d4759',
+            fontSize: 14
+          },
+          // Inclui os valores e porcentagens nas legendas
+          format: '0.##' // Formato para exibir os números
+        },
+        
+        pieStartAngle: 100,
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+    }
+  </script>
     
 </html>
