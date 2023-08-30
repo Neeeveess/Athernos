@@ -926,7 +926,7 @@ input::placeholder {
                 grid-area: totalProd;
                 box-shadow: 0px 0px 10px 1px #00000052;
                 border-radius: 20px;
-                height: fit-content;
+                height: 100%;
                 margin: auto;
                 h2 {
                     padding: 10px;
@@ -943,6 +943,7 @@ input::placeholder {
                 }
                 .value {
                     @extend %d-flex;
+                    height: inherit;
                     span {
                         @extend %d-flex;
                         color: $black-text;
@@ -957,19 +958,22 @@ input::placeholder {
             .chart-container {
                 grid-area: categorias;
                 height: 100%;
+                @extend %d-flex;
+                flex-direction: column;
                 width: fit-content;
                 box-shadow: 0px 0px 10px 1px #00000052;
                 border-radius: 20px;
                 margin: auto;
                 h2 {
-                    height: 20%;
                     padding: 10px;
                     background-color: $gray;
                     border-radius: 20px 20px 0 0;
                     @extend %d-flex;
                     color: $secundary;
+                    // width: 100%;
                     font-size: 3.6rem;
                     font-weight: 600;
+                    text-align: center;
                     margin: 0;
                     @media screen and (max-width: 1400px) {
                         font-size: 3.2rem;
@@ -977,7 +981,7 @@ input::placeholder {
                 }
                 #piechart {
                     position: relative;
-                    height: 80%;
+                    height: inherit;
                     width: 100%;
                     display: flex;
                     justify-content: center;
