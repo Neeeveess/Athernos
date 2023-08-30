@@ -28,15 +28,6 @@
 
 <body class="main-index">
     <?php include_once ABSPATH.'layout/menu-lateral.php';?>
-    <section class="cabecalho">
-        <?php
-            if(isset($_GET['msg'])){
-        ?>
-            <div class="msg-alerta" roles="alert">Código não cadastrado</div>
-        <?php
-            }   
-        ?>
-    </section>
         <section class="entrada-prod">
             <form method='post' class="box-cadastro">
                 <h1>Entrada de Produtos</h1>

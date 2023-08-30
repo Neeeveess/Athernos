@@ -1,6 +1,31 @@
 <?php 
     require_once 'config.php';
+    require_once ABSPATH."classes/Crud.php";
+    $crud = new Crud();
+    //SELECT DO GRAFICO
+    $select = $crud->select('c.id, c.nome AS categoria,
+             COUNT(p.id) AS quantidade_de_produtos',
+            'categoria c
+            LEFT JOIN produtos p ON c.id = p.id_categoria
+            GROUP BY c.id, c.nome');
 
+    $selectProdutos = $crud->select('count(id) as qtd','produtos');
+    $select3Entradas = $crud->select('p.id AS id_produto,
+        p.codigo AS codigo_produto,
+        p.nome AS nome_produto,
+        c.nome AS nome_categoria,
+        l.quantidade AS quantidade_lote,
+        l.custo_unit AS custo_lote,
+        l.validade AS validade_lote',
+        'produtos p
+        JOIN categoria c ON p.id_categoria = c.id
+        JOIN lotes l ON p.id = l.id_produto',null,
+        'l.data_entrada DESC
+        LIMIT 3;');
+
+    $categorias = [];
+    $quantidades = [];
+    
     $titulo = "Pagina Inicial - Athernos";
     session_start();
     if(!isset($_SESSION['email'])){
@@ -30,13 +55,40 @@
         <p>Esse é nosso projeto de estoque</p> -->
         <section class="box-grid">
             <div class="total-produtos">
-
+                <h2>Qtd de produtos cadastrados</h2>
+                <?php 
+                
+                if ($selectProdutos->num_rows > 0) {
+                    while ($linhas = $selectProdutos->fetch_object()) {
+                        echo $linhas->qtd;
+                    }
+                }
+                
+                ?>
             </div>
             <div class="ultimas-entradas-saidas">
+                <?php 
                 
+                if ($select3Entradas->num_rows > 0) {
+                    while ($linhas = $select3Entradas->fetch_object()) {
+                        
+                        echo $linhas->id_produto.' - ';
+                        echo $linhas->codigo_produto.' - ';
+                        echo $linhas->nome_produto.' - ';
+                        echo $linhas->nome_categoria.' - ';
+                        echo $linhas->quantidade_lote.' - ';
+                        echo $linhas->custo_lote.' - ';
+                        echo $linhas->validade_lote."<br>";
+                    }
+                }
+                
+                ?>
             </div>
             <div class="chart-container" style="position: relative; height:500px; width:500px">
-                <canvas id="categorias-pizza"></canvas>
+            <h2>Categorias ativas</h2>
+                <?php if ($select->num_rows > 0) { ?>
+                    <canvas id="categorias-pizza"></canvas>
+                <?php } ?>
             </div>  
 
         </section>
@@ -44,15 +96,7 @@
 </body>
 <?php 
 
-require_once ABSPATH."classes/Crud.php";
-$crud = new Crud();
-$select = $crud->select('c.id, c.nome AS categoria,
-         COUNT(p.id) AS quantidade_de_produtos',
-        'categoria c
-        LEFT JOIN produtos p ON c.id = p.id_categoria
-        GROUP BY c.id, c.nome');
-$categorias = [];
-$quantidades = [];
+
 
 if ($select->num_rows > 0) {
 while ($linhas = $select->fetch_object()) {
@@ -91,18 +135,9 @@ array_multisort($quantidades, SORT_DESC, $categorias);
                 }],
                 labels: categorias.map((label, i) => `${label} - ${quantidades[i]}`), // Adiciona os valores numéricos
             },
-            options: {
-                
+            options: {          
+                pieSliceText: 'label',      
                 plugins: {
-                    title: {
-                        display: true,
-                        text: 'Categorias ativas',
-                        color: '#3d4759',
-                        font: {
-                            weight: 'bold',
-                            size: 20
-                        }
-                    },
                     legend: {
                         display: true,
                         labels: {
@@ -111,10 +146,11 @@ array_multisort($quantidades, SORT_DESC, $categorias);
                                 size: 14
                             }
                         }
-                    }  
-                                      
+                    } 
                 }
+                           
             }
         });
     </script>
+    
 </html>

@@ -61,7 +61,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-text-fill-color: $secundary !important;
+    -webkit-text-fill-color: $black-text !important;
     transition: background-color 5000s ease-in-out 0s;
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
@@ -106,6 +106,7 @@ input[type="radio"] {
     margin-left: -355px;
     transition: all linear 200ms;
 }
+//SHOW CLOSE NAV BAR
 .hide {
     display: none !important;
 }
@@ -116,6 +117,48 @@ input[type="radio"] {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+[data-tooltip] {
+    position: relative;
+    font-weight: bold;
+}
+
+[data-tooltip]:after {
+    display: none;
+    position: absolute;
+    top: 0;
+    padding: 5px;
+    border-radius: 3px;
+    left: calc(100% + 17px);
+    font-size: 1.2rem;
+    font-weight: 400;
+    content: attr(data-tooltip);
+    white-space: nowrap;
+    background-color: #ffffff4a;
+    box-shadow: 0px 0px 10px 1px #00000052;
+    color: $black-text;
+}
+[data-tooltip]::before {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px;
+    left: calc(100% + 5px);
+    font-size: 1.4rem;
+    content: "";
+    width: 25px;
+    height: 12px;
+    background-color: $white;
+    clip-path: polygon(50% 0%, 50% 50%, 50% 100%, 0% 50%);
+    white-space: nowrap;
+    color: $white;
+}
+
+[data-tooltip]:hover:after,
+[data-tooltip]:hover::before {
+    display: block;
 }
 
 @keyframes rotation {
@@ -430,26 +473,20 @@ input::placeholder {
     .form {
         margin: 50px;
         width: 100%;
-        height: 100%;
-        padding: 3em 10px;
+        height: auto;
+        padding: 3rem 10px;
         border-radius: 10px;
         background-color: $gray;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 10px 1px #00000052;
         gap: 2rem;
-        @media screen {
-            @media (max-width: 600px) {
-                width: 100vw;
-            }
-            @media (max-height: 1026px) {
-                max-height: 80vh;
-            }
-            @media (max-height: 600px) {
-                max-height: 100vh;
-            }
+        @media screen and (max-width: 1400px) {
+            gap: 1.5rem;
+            margin: 20px;
+            height: auto;
         }
 
         a {
@@ -468,21 +505,32 @@ input::placeholder {
             padding: 10px 5px;
             border-radius: 10px;
             background-color: #fd00001c;
-            margin-bottom: 1rem;
-            width: 100%;
+            margin-bottom: 1.5rem;
+            width: 75%;
         }
         h1 {
             color: $secundary;
             font-size: 3.6rem;
             font-weight: 700;
             letter-spacing: 2px;
-            margin-bottom: 20px;
             text-transform: uppercase;
+            margin: 0;
+            @media screen and (max-width: 1400px) {
+                font-size: 3.2rem;
+            }
         }
         p {
             color: $black-text;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 400;
+            @media screen and (max-width: 1400px) {
+                font-size: 1.4rem;
+            }
+        }
+        .flex-field {
+            @extend %d-flex;
+            width: 75%;
+            gap: 1.5rem;
         }
         .textfield {
             padding: 5px 0;
@@ -491,19 +539,37 @@ input::placeholder {
             align-items: flex-start;
             width: 75%;
             position: relative;
-            margin-bottom: 1em;
-            // label{
-            //     font-size: 20px;
-            //     font-weight: 600;
-            //     padding: 5px;
-            //     color: $black-text;
-            // }
+            @media screen and (max-width: 1400px) {
+                font-size: 1.4rem;
+            }
             .has-val.input2 + .focus-input2::after {
-                top: -20%;
+                top: -13%;
+                left: 0%;
+                font-size: 1.6rem;
+                font-weight: 600;
+                color: $primary;
+                -webkit-transition: all 0.2s;
+                -o-transition: all 0.2s;
+                -moz-transition: all 0.2s;
+                transition: all 0.2s;
+                @media screen and (max-width: 1400px) {
+                    font-size: 1.4rem;
+                }
             }
 
             .input2:focus + .focus-input2::after {
-                top: -20%;
+                top: -13%;
+                left: 0%;
+                font-size: 1.6rem;
+                font-weight: 600;
+                color: $primary;
+                -webkit-transition: all 0.2s;
+                -o-transition: all 0.2s;
+                -moz-transition: all 0.2s;
+                transition: all 0.2s;
+                @media screen and (max-width: 1400px) {
+                    font-size: 1.4rem;
+                }
             }
             .input2 {
                 width: 100%;
@@ -512,13 +578,17 @@ input::placeholder {
 
                 border: none;
                 outline: none;
-                font-size: 16px;
+                font-size: 1.6rem;
                 background-color: $white;
                 backdrop-filter: blur(10px);
                 box-shadow: 0px 0px 10px 1px #00000052;
                 border-radius: 5px;
                 font-size: 1.8rem;
                 color: $black-text;
+                @media screen and (max-width: 1400px) {
+                    padding: 10px;
+                    font-size: 1.4rem;
+                }
             }
             .focus-input2 {
                 position: absolute;
@@ -543,8 +613,11 @@ input::placeholder {
                     -moz-transition: all 0.2s;
                     transition: all 0.2s;
                     box-sizing: inherit;
-                    font-size: 1.8rem;
+                    font-size: 1.6rem;
                     color: $black-text;
+                    @media screen and (max-width: 1400px) {
+                        font-size: 1.4rem;
+                    }
                 }
             }
         }
@@ -559,7 +632,11 @@ input::placeholder {
                 margin-top: 0.5em;
             }
             label {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+                margin: 0;
+                @media screen and (max-width: 1400px) {
+                    font-size: 1.4rem;
+                }
                 input {
                     margin-right: 5px;
                 }
@@ -584,10 +661,19 @@ input::placeholder {
                 transition: $transition-100;
                 background-color: #854eeb;
             }
+            @media screen and (max-width: 1400px) {
+                padding: 10px;
+                width: 30%;
+                font-size: 1.6rem;
+                margin: 0;
+            }
         }
         a {
             font-size: 1.6rem;
             color: $black-text;
+            @media screen and (max-width: 1400px) {
+                margin-top: -1rem;
+            }
         }
     }
     .menu-lateral {
@@ -624,6 +710,9 @@ input::placeholder {
                 justify-content: space-between;
                 flex-direction: column;
                 width: 100%;
+                @media screen and (max-width: 1400px) {
+                    gap: 1.5rem;
+                }
 
                 &__title {
                     font-size: 3.6rem;
@@ -635,6 +724,9 @@ input::placeholder {
                     &--destack {
                         font-weight: 600;
                         color: $secundary;
+                    }
+                    @media screen and (max-width: 1400px) {
+                        font-size: 3.2rem;
                     }
                 }
                 &__logo {
@@ -659,6 +751,9 @@ input::placeholder {
                     align-items: start;
                     flex-direction: column;
                     gap: 1rem;
+                    @media screen and (max-width: 1400px) {
+                        gap: 0.7rem;
+                    }
                     .box-nav-bar {
                         width: 100%;
                     }
@@ -695,6 +790,11 @@ input::placeholder {
                             path {
                                 fill: $black-text;
                             }
+                            @media screen and (max-width: 1400px) {
+                                width: 20px;
+                                height: 20px;
+                                font-size: 1.4rem;
+                            }
                         }
                         &:hover {
                             color: $secundary;
@@ -705,6 +805,10 @@ input::placeholder {
                                     transition: $transition-100;
                                 }
                             }
+                        }
+                        @media screen and (max-width: 1400px) {
+                            font-size: 1.6rem;
+                            gap: 1rem;
                         }
                     }
                     &__itens {
@@ -721,6 +825,11 @@ input::placeholder {
                             &::before {
                                 background-color: $primary;
                             }
+                        }
+                        @media screen and (max-width: 1400px) {
+                            margin-bottom: 0.5rem;
+                            margin-top: 0.5rem;
+                            gap: 0rem;
                         }
                     }
                     &__item {
@@ -752,6 +861,9 @@ input::placeholder {
                                 background-color: $primary;
                             }
                         }
+                        @media screen and (max-width: 1400px) {
+                            font-size: 1.4rem;
+                        }
                     }
                 }
             }
@@ -761,6 +873,9 @@ input::placeholder {
                 justify-content: space-between;
                 .box-conta {
                     position: relative;
+                    a {
+                        display: block;
+                    }
                     .itens-conta {
                         position: absolute;
                         top: 0;
@@ -798,7 +913,7 @@ input::placeholder {
         text-align: center;
         h1 {
             color: $secundary;
-            font-size: 8rem;
+            font-size: 3.6rem;
             line-height: 0.9em;
             margin-bottom: 0.5em;
             span {
@@ -1012,21 +1127,18 @@ input::placeholder {
     .saida-prod {
         width: 100%;
         margin: auto;
-        .msg {
-            width: fit-content;
-            margin: 0 auto 50px auto;
-            .msg-alerta {
-                text-align: center;
-                font-size: 1.8rem;
-                font-weight: 600;
-                color: $white;
-                padding: 10px 5px;
-                border-radius: 10px;
-                background-color: #fd00001c;
-                margin-bottom: 1rem;
-                width: 100%;
-            }
+        .msg-alerta {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: $white;
+            padding: 10px 5px;
+            border-radius: 10px;
+            background-color: #fd00001c;
+            margin-bottom: 1rem;
+            width: 100%;
         }
+
         .box-cadastro {
             display: flex;
             justify-content: center;
@@ -1035,13 +1147,13 @@ input::placeholder {
             flex-direction: column;
             width: 50%;
             margin: auto;
-            // box-shadow: 0px 0px 40px 9px #c9c9c9;
+            box-shadow: 0px 0px 10px 1px #00000052;
             border: 1px solid #ffffff42;
             background: $gray;
-            padding: 50px;
+            padding: 3rem 10px;
             height: fit-content;
             border-radius: 10px;
-            @media screen and (max-width: 1300px) {
+            @media screen and (max-width: 1400px) {
                 width: 80%;
             }
             h1 {
@@ -1049,6 +1161,14 @@ input::placeholder {
                 font-size: 3.6rem;
                 font-weight: 600;
                 margin-bottom: 15px;
+                @media screen and (max-width: 1400px) {
+                    font-size: 3.2rem;
+                }
+            }
+            .flex-field {
+                @extend %d-flex;
+                width: 75%;
+                gap: 1.5rem;
             }
             .textfield {
                 display: flex;
@@ -1056,22 +1176,29 @@ input::placeholder {
                 align-items: baseline;
                 width: 100%;
                 label {
-                    font-size: 1.8rem;
-                    font-weight: 400;
+                    font-size: 1.6rem;
+                    font-weight: 600;
                     color: $primary;
                     width: fit-content;
                     text-align: end;
                     padding-right: 5px;
                     white-space: nowrap;
+                    @media screen and (max-width: 1400px) {
+                        font-size: 1.4rem;
+                    }
                 }
                 input {
-                    font-size: 1.8rem;
+                    font-size: 1.6rem;
                     font-weight: 400;
                     color: $black-text;
                     width: 100%;
                     padding: 5px 10px;
                     border-radius: 5px;
                     border-bottom: 1px solid #e9e9e9;
+                    box-shadow: 0px 0px 10px 1px #00000052;
+                    @media screen and (max-width: 1400px) {
+                        font-size: 1.4rem;
+                    }
                 }
             }
             .textfield-radio {
@@ -1085,35 +1212,48 @@ input::placeholder {
                     margin-top: 0.5em;
                 }
                 label {
-                    font-size: 1.8rem;
+                    font-size: 1.6rem;
+                    @media screen and (max-width: 1400px) {
+                        font-size: 1.4rem;
+                    }
                     input {
                         margin-right: 5px;
                     }
                 }
             }
             .categoria {
+                justify-content: center;
                 select {
                     cursor: pointer;
                     padding: 5px 8px;
                     border-radius: 5px;
                     color: $black-text;
-                    font-size: 1.8rem;
+                    font-size: 1.6rem;
                     outline: none;
                     -webkit-appearance: none;
                     -moz-appearance: none;
                     appearance: none;
                     text-align: center;
                     width: fit-content;
+                    @media screen and (max-width: 1400px) {
+                        font-size: 1.4rem;
+                    }
 
                     option {
                         text-align: start;
                         margin: 0 auto;
                         width: fit-content;
-                        font-size: 1.8rem;
+                        font-size: 1.6rem;
+                        @media screen and (max-width: 1400px) {
+                            font-size: 1.4rem;
+                        }
                     }
                 }
                 span {
-                    font-size: 1.8rem;
+                    font-size: 1.6rem;
+                    @media screen and (max-width: 1400px) {
+                        font-size: 1.4rem;
+                    }
                 }
                 button {
                     color: $secundary;
@@ -1153,10 +1293,19 @@ input::placeholder {
                     transition: $transition-100;
                     background-color: #854eeb;
                 }
+                @media screen and (max-width: 1400px) {
+                    padding: 10px;
+                    width: 30%;
+                    font-size: 1.6rem;
+                    margin: 0;
+                }
             }
             a {
                 font-size: 1.6rem;
                 color: $black-text;
+                @media screen and (max-width: 1400px) {
+                    margin-top: -1rem;
+                }
             }
         }
     }
@@ -1222,7 +1371,7 @@ input::placeholder {
         flex-direction: column;
         width: 50%;
         margin: auto;
-        // box-shadow: 0px 0px 40px 9px #c9c9c9;
+        box-shadow: 0px 0px 10px 1px #00000052;
         border: 1px solid #ffffff42;
         background: $gray;
         padding: 50px;
@@ -1236,6 +1385,9 @@ input::placeholder {
             margin-bottom: 15px;
             font-size: 3.6rem;
             font-weight: 600;
+            @media screen and (max-width: 1400px) {
+                font-size: 3.2rem;
+            }
         }
         form {
             display: flex;
@@ -1251,13 +1403,15 @@ input::placeholder {
                 gap: 1rem;
                 width: 80%;
                 input {
-                    font-size: 1.8rem;
+                    font-size: 1.6rem;
                     font-weight: 400;
                     color: $black-text;
+                    @media screen and (max-width: 1400px) {
+                        font-size: 1.4rem;
+                    }
                 }
             }
             button[type="submit"] {
-                background-color: $white;
                 border: none;
                 width: 50%;
                 height: 50px;
@@ -1268,12 +1422,14 @@ input::placeholder {
                 font-size: 1.8rem;
                 font-weight: bold;
                 letter-spacing: 2px;
-                color: $black-text;
                 border: 1px solid #ffffff33;
                 transition: $transition-100;
+                color: $black-text;
+                color: $white;
+                background-color: $secundary;
                 &:hover {
-                    color: $black-text;
-                    background-color: #f5f5f5;
+                    transition: $transition-100;
+                    background-color: #854eeb;
                 }
             }
             a {

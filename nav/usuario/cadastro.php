@@ -61,13 +61,15 @@
                 <input class="input2" type="text" name="dados[nome]" required>
                 <span class="focus-input2" data-placeholder="Nome"></span>
             </div>
-            <div class="textfield">
-                <input class="input2" type="password" name="dados[senha]" required>
-                <span class="focus-input2" data-placeholder="Senha"></span>
-            </div>
-            <div class="textfield">
-                <input class="input2" type="password" name="senha2" required>
-                <span class="focus-input2" data-placeholder="Confirme sua senha"></span>
+            <div class="flex-field">
+                <div class="textfield">
+                    <input class="input2" type="password" name="dados[senha]" required>
+                    <span class="focus-input2" data-placeholder="Senha"></span>
+                </div>
+                <div class="textfield">
+                    <input class="input2" type="password" name="senha2" required>
+                    <span class="focus-input2" data-placeholder="Confirme sua senha"></span>
+                </div>
             </div>
             <div class="textfield-radio">                
                 <label>

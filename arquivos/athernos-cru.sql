@@ -101,6 +101,6 @@ BEGIN
 END$
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `nivel`) VALUES
-(1, 'Adm', 'adm@gmail.com', '0e023702b107d3520a33e6a03362fed5', 2), --SENHA PE2023*
-(2, 'Editor', 'editor@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 1), --SENHA 123456
-(3, 'User', 'user@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 0); --SENHA 123456
+(1, 'Adm', 'adm@gmail.com', '0e023702b107d3520a33e6a03362fed5', 2), 
+(2, 'Editor', 'editor@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 1), 
+(3, 'User', 'user@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 0); 

@@ -42,7 +42,8 @@
 <body class="main-index">
     <?php include_once ABSPATH.'layout/menu-lateral.php';?>
     <section class="saida-prod">
-        <section class="msg">
+        <form method='post' class="box-cadastro">
+            <h1>Saída de Produtos</h1>
             <?php
                     if(isset($_GET['msg']) and $_GET['msg'] == '1'){
             ?>
@@ -50,9 +51,6 @@
             <?php
                     }
             ?>
-        </section>
-        <form method='post' class="box-cadastro">
-            <h1>Saída de Produtos</h1>
             <div class="textfield">
                 <label for="dados[id_produto]">Id do Produto:</label>
                 <input type = "text" name = "dados[id_produto]" id="id_produto" required>
@@ -70,18 +68,19 @@
                 <input type = "text" name = "dados[nome]" readonly id="nome_produto">   
             </div>
                 
+            <div class="flex-field">
+                <div class="textfield categoria">
+                    <label for="dadosLote[id_lote]">Lotes:</label>
+                    <select name="dadosLote[id_lote]" id="lotes">
+                        <option>Selecione o Lote</option>
+                    </select>
+                </div>
+                
 
-            <div class="textfield categoria">
-                <label for="dadosLote[id_lote]">Lotes:</label>
-                <select name="dadosLote[id_lote]" id="lotes">
-                    <option>Selecione o Lote</option>
-                </select>
-            </div>
-            
-
-            <div class="textfield">
-                <label for="qtd">Quantidade:</label>
-                <input type = "number" min="1" name = "qtd">
+                <div class="textfield">
+                    <label for="qtd">Quantidade:</label>
+                    <input type = "number" min="1" name = "qtd">
+                </div>
             </div>
             
             

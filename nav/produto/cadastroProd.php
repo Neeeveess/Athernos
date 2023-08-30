@@ -55,7 +55,8 @@
 <body class="main-index">
     <?php include_once ABSPATH.'layout/menu-lateral.php';?>
     <section class="cadastrar-prod">        
-        <section class="msg">
+        <form class="box-cadastro" method='post' autocomplete="off">
+            <h1>Cadastro de Produtos</h1>
             <?php
                     if(isset($_GET['msg']) and $_GET['msg'] == '1'){
             ?>
@@ -63,9 +64,6 @@
             <?php
                     }
             ?>
-        </section>
-        <form class="box-cadastro" method='post' autocomplete="off">
-            <h1>Cadastro de Produtos</h1>
             <div class="textfield">
                 <label for="codigo" class="">Codigo:</label>
                 <input type="text" name="dados[codigo]" required>

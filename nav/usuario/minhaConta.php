@@ -81,18 +81,21 @@
             ?>
 
             <p>Para alterar apenas o nome, basta preencher a senha atual!</p>
-            <div class="textfield">
-                
-                <input class="input2" type="text" name="dados[nome]" placeholder="Nome" value="<?php echo $_SESSION['nome'];?>" required >
+            <div class="flex-field">
+                <div class="textfield">                    
+                    <input class="input2" type="text" name="dados[nome]" placeholder="Nome" value="<?php echo $_SESSION['nome'];?>" required >
+                </div>
+                <div class="textfield">
+                    <input class="input2" type="password" name="dados[antiga]" placeholder="Digite sua senha Atual..." required >
+                </div>
             </div>
-            <div class="textfield">
-                <input class="input2" type="password" name="dados[antiga]" placeholder="Digite sua senha Atual..." required >
-            </div>
-            <div class="textfield">
-                <input class="input2" type="password" name="dados[senha]" placeholder="Digite sua nova Senha..." >
-            </div>
-            <div class="textfield">
-                <input class="input2" type="password" name="senha2" placeholder="Confirme sua nova senha..." >
+            <div class="flex-field">
+                <div class="textfield">
+                    <input class="input2" type="password" name="dados[senha]" placeholder="Digite sua nova Senha..." >
+                </div>
+                <div class="textfield">
+                    <input class="input2" type="password" name="senha2" placeholder="Confirme sua nova senha..." >
+                </div>
             </div>
             <input type="submit">
             <a href="<?php echo BASEURL;?>index.php">Voltar</a>
