@@ -28,9 +28,18 @@
     <main class="corpo">
         <!-- <h1>Bem vindo <br/>ao<span> Athernos</span></h1>
         <p>Esse é nosso projeto de estoque</p> -->
-        <div class="chart-container" style="position: relative; height:500px; width:500px">
-        <canvas id="myChart"></canvas>
-        </div>  
+        <section class="box-grid">
+            <div class="total-produtos">
+
+            </div>
+            <div class="ultimas-entradas-saidas">
+                
+            </div>
+            <div class="chart-container" style="position: relative; height:500px; width:500px">
+                <canvas id="categorias-pizza"></canvas>
+            </div>  
+
+        </section>
     </main>
 </body>
 <?php 
@@ -58,7 +67,7 @@ array_multisort($quantidades, SORT_DESC, $categorias);
 ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-        const ctx = document.getElementById('myChart');
+        const ctx = document.getElementById('categorias-pizza');
         
         // Dados vindos do PHP
         const categorias = <?php echo json_encode($categorias); ?>;
