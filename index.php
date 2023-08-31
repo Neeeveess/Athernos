@@ -16,13 +16,13 @@
     $select3Entradas = $crud->select('
         p.id AS ID_Produto,
         p.nome AS Nome,
-        l.codigo AS ID_do_Lote,
-        l.quantidade AS Quantidade,
-        l.data_entrada AS Data_de_Entrada',
+        ll.id_lotes AS ID_do_Lote,
+        ll.quantidade AS Quantidade,
+        ll.data_manipulacao AS Data_de_Entrada',
         'produtos p
-        JOIN lotes l ON p.id = l.id_produto',
-        null,
-        'l.data_entrada DESC
+        JOIN log_lotes ll ON p.id = ll.id_produto',
+        "ll.tipo = 'Entrada'",
+        'll.data_manipulacao DESC
         LIMIT 3;');
 
     //SELECT 3 ULTIMAS SAIDAS
@@ -66,48 +66,96 @@
 <body class="main-index">
     <?php include_once ABSPATH.'layout/menu-lateral.php';?>
     <main class="corpo">
-        <section class="box-grid">
-            <div class="total-produtos">
-                <h2>Quantidade de Produtos Castrados</h2>
-                <div class="value">                
-                    <?php if ($selectProdutos->num_rows > 0) {
-                        while ($linhas = $selectProdutos->fetch_object()) {
-                            echo "<span>".$linhas->qtd."</span>";
-                        }
-                    } ?>
-                </div>
-            </div>
-            <div class="chart-container" >
-                <h2>Quantidade de Produtos por Categoria</h2>
-                <?php if ($select->num_rows > 0) { ?>
+        <section class="box-grid" >
+            <?php if ($selectProdutos->num_rows > 0) { ?>
+                <?php while ($linhas = $selectProdutos->fetch_object()) { ?>
+                                <?php if(!$linhas->qtd == 0){ ?>
+                           
+                <div class="total-produtos" <?php if($_SESSION['nivel'] < 1){ ?> 
+                    style="grid-column: 1; grid-row: 1/span 2;" <?php } ?> >
+                        <h2>Quantidade de Produtos Castrados</h2>
+                        <div class="value">                
+                                <span><?= $linhas->qtd?></span>
+                        </div>
+                    </div>
+                    <?php } ?>
+            <?php } }?>
+            <?php if ($select->num_rows > 0) { ?>
+                <div class="chart-container" <?php if($_SESSION['nivel'] < 1){ ?> 
+                    style="grid-column: 2; grid-row: 1/span 2;" <?php } ?> >
+                    <h2>Quantidade de Produtos por Categoria</h2>
                     <div id="piechart"></div>
-                <?php } ?>
-                
-            </div>  
-            <div class="ultimas-entradas-saidas">
-                <h2>Entradas</h2>
-                    <?php  if ($select3Entradas->num_rows > 0) {
-                        while ($linhas = $select3Entradas->fetch_object()) {
-                            
-                            echo $linhas->ID_Produto.' - ';
-                            echo $linhas->Nome.' - ';
-                            echo $linhas->ID_do_Lote.' - ';
-                            echo $linhas->Quantidade.' - ';
-                            echo $linhas->Data_de_Entrada."<br>";
-                        }
-                    } ?>
-                    <h2>Saidas</h2>
-                    <?php if ($select3Saidas->num_rows > 0) {
-                        while ($linhas = $select3Saidas->fetch_object()) {
-                            
-                            echo $linhas->ID_Produto.' - ';
-                            echo $linhas->Nome.' - ';
-                            echo $linhas->ID_do_Lote.' - ';
-                            echo $linhas->Quantidade.' - ';                                           
-                            echo $linhas->Data_da_Saida."<br>";
-                        }
-                    } ?>
-            </div>
+                    
+                </div>  
+            <?php } ?>
+            <?php if(($_SESSION['nivel'] >= 1)){ ?> 
+                <div class="ultimas-entradas-saidas">
+                <?php if ($select3Entradas->num_rows > 0){ ?>
+                    <h2>Entradas</h2>
+                        <table class="table-entrada-saida">
+                            <thead>
+                                <tr>
+                                    
+                                    <th class="codigo" scope="col">ID Produto</th>
+                                    <th class="codigo" scope="col">Nome</th>
+                                    <th class="nome" scope="col">ID do lote</th>
+                                    <th class="nome" scope="col">Quantidade</th>
+                                    <th class="total" scope="col">Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                
+                                        <?php while($rows = $select3Entradas->fetch_object()){
+                                            $data_manipulacao = strtotime($rows->Data_de_Entrada); 
+                                            ?>
+                                            <tr>
+
+                                                <td><?php echo $rows->ID_Produto;?></td>
+                                                <td><?php echo $rows->Nome;?></td>
+                                                <td><?php echo $rows->ID_do_Lote;?></td>
+                                                <td><?php echo $rows->Quantidade;?></td>                                                
+                                                <td><?php echo date('d/m/Y - H:i:s', $data_manipulacao);?></td>
+                                <?php
+                                        } ?>
+                                   
+                            </tbody>
+                        </table> 
+                        <?php } ?>
+                        <?php if ($select3Saidas->num_rows > 0){ ?>
+                    <h2 style="border-radius: 0;">Saidas</h2>                       
+                        <table style="border-radius: 0 0 20px 20px;" class="table-entrada-saida">
+                            <thead>
+                                <tr>
+                                    
+                                    <th class="codigo" scope="col">ID Produto</th>
+                                    <th class="codigo" scope="col">Nome</th>
+                                    <th class="nome" scope="col">ID do lote</th>
+                                    <th class="nome" scope="col">Quantidade</th>
+                                    <th class="total" scope="col">Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                
+                                    <?php while($rows = $select3Saidas->fetch_object()){
+                                            $data_manipulacao = strtotime($rows->Data_da_Saida); 
+                                            ?>
+                                            <tr>
+
+                                                <td><?php echo $rows->ID_Produto;?></td>
+                                                <td><?php echo $rows->Nome;?></td>
+                                                <td><?php echo $rows->ID_do_Lote;?></td>
+                                                <td><?php echo $rows->Quantidade;?></td>                                                
+                                                <td><?php echo date('d/m/Y - H:i:s', $data_manipulacao);?></td>
+                                <?php } ?>
+                                
+                                
+                            </tbody>
+                        </table>
+                        <?php  } ?>
+                </div>
+            <?php } ?>
             
 
         </section>

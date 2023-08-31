@@ -5,7 +5,7 @@
 ## Membros:
 
 -   João Vitor Neves Marques
--   Danilo do Prado Souza
+-   Danilo do Prado Souza [https://github.com/Daanilooo]
 
 ## Linguagens Utilizadas:
 
@@ -19,6 +19,4 @@
 
 ## Utilização:
 
--   Pasta arquivos contem 2 banco de dados e arquivos CSV para importação
-    -   1º Banco: Zerado somente com a criação das tabelas, views, precedures...
-    -   2º Banco: Igual a acima mas com `inserts`
+-   Pasta `arquivos` contem o banco de dados e arquivos CSV para importação
