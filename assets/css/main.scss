@@ -205,6 +205,10 @@ input::placeholder {
                 }
             }
             .modal-body {
+                .msg-error {
+                    font-size: 1.8rem;
+                    color: $secundary;
+                }
                 table {
                     text-align: center;
                     border-collapse: collapse;
@@ -989,6 +993,8 @@ input::placeholder {
                 }
             }
             .ultimas-entradas-saidas {
+                box-shadow: 0px 0px 10px 1px #00000052;
+                border-radius: 20px;
                 grid-area: ultimas;
                 h2 {
                     padding: 3px;

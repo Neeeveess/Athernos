@@ -61,6 +61,6 @@
 </div>
 <?php
     }else{
-        echo "<i class=\"glyphicon glyphicon-info-sign\"></i> Nenhuma entrada encontrada!";
+        echo "<p class='msg-error'>Nenhuma entrada encontrada!</p>";
     }
 ?>
